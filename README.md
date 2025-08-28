@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Box Breathing Technique
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Box Breathing Technique is intended to be a demonstration of React in a web app to create a visualisation of the box breathing technique. The box breathing technique, or square breathing technique, is a controlled breathing technique used to manage anxiety. For more information on the box breathing technique, visit https://www.blackdoginstitute.org.au/wp-content/uploads/2021/05/Square-Breathing-Resource-Guide.pdf.
 
-## Available Scripts
+## Table of Contents
+- [1 - Repository Organisation](#1---repository-organisation)
+  - [1.1 - Branches](#11---branches)
+    - [1.1.1 - main](#111---main)
+    - [1.1.2 - dev](#112---dev)
+    - [1.1.3 - Feature Branches](#113---feature-branches)
+  - [1.2 - Project Management](#12---project-management)
+- [2 - Tech Stack](#2---tech-stack)
+  - [2.1 - React](#21---react)
+  - [2.2 - TypeScript](#22---typescript)
+  - [2.3 - npm](#23---npm)
+- [3 - CI/CD](#3---cicd)
 
-In the project directory, you can run:
+## 1 - Repository Organisation
 
-### `npm start`
+### 1.1 - Branches
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Rules and standards have been set for specific branches to coordinate the repository.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### 1.1.1 - main
 
-### `npm test`
+[main](https://github.com/Box-Breathing-Technique/Box-Breathing-Technique.github.io/tree/main) is a protected branch and is the default branch of this repository. main should contain the latest stable version of the project. This branch can only be added to via pull requests from [dev](#112---dev).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 1.1.2 - dev
 
-### `npm run build`
+[dev](https://github.com/Box-Breathing-Technique/Box-Breathing-Technique.github.io/tree/dev) is a protected branch. dev should contain the most recent development version of the project. dev should be updated via pull requests from [feature branches](#113---feature-branches), however pushing directly to dev is permitted to allow for hotfixes and small changes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 1.1.3 - Feature Branches
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+New features should be implemented in their own branch created from [dev](#112---dev), and merged into dev with a pull request upon completion.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1.2 - Project Management
 
-### `npm run eject`
+Tasks will be managed using the [Box Breathing Technique GitHub projects board](https://github.com/orgs/Box-Breathing-Technique/projects/1). Tasks will be added and tracked using this board.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 2 - Tech Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2.1 - React
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+React will be used to create the web app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 2.2 - TypeScript
 
-## Learn More
+TypeScript will be used to assist in development of the web app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2.3 - npm
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+npm will be use to facilitate managing dependencies, building, and testing of the project.
+
+## 3 - CI/CD
+
+GitHub Actions will be used to set up CI/CD for automatic testing and deployment.
