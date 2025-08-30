@@ -15,6 +15,7 @@ Box Breathing Technique is intended to be a demonstration of React in a web app 
   - [2.2 - TypeScript](#22---typescript)
   - [2.3 - npm](#23---npm)
 - [3 - CI/CD](#3---cicd)
+  - [3.1 - test](#31---test)
 
 ## 1 - Repository Organisation
 
@@ -42,16 +43,20 @@ Tasks will be managed using the [Box Breathing Technique GitHub projects board](
 
 ### 2.1 - React
 
-React will be used to create the web app.
+React is used to create the web app.
 
 ### 2.2 - TypeScript
 
-TypeScript will be used to assist in development of the web app.
+TypeScript is used to assist in development of the web app.
 
 ### 2.3 - npm
 
-npm will be use to facilitate managing dependencies, building, and testing of the project.
+npm is used to facilitate managing dependencies, building, and testing of the project.
 
 ## 3 - CI/CD
 
-GitHub Actions will be used to set up CI/CD for automatic testing and deployment.
+GitHub Actions is used to facilitate CI/CD workflows.
+
+### 3.1 - test
+
+[test.yaml](.github/workflows/test.yaml) uses prettier to check files are formatted correctly, then uses npm test to ensure tests pass. This workflow runs on each pull request.
