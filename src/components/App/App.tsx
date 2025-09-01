@@ -7,6 +7,7 @@
 import React from "react";
 import "./App.css";
 import WarningIcon from "../construction/WarningIcon";
+import WarningMessage from "../construction/WarningMessage";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -30,6 +31,7 @@ function App(): React.ReactElement {
                 weight={300}
                 color="grey"
             />
+            <WarningMessage />
         </div>
     );
 }

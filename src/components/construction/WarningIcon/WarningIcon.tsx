@@ -8,8 +8,8 @@ import React from "react";
 import "./WarningIcon.css";
 
 interface WarningIconProps {
-    size: number;
-    weight: number;
+    size?: number;
+    weight?: number;
     color?: string;
 }
 
