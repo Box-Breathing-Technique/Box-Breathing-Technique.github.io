@@ -19,6 +19,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,

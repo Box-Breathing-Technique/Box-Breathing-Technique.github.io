@@ -1,24 +1,35 @@
-import React from "react";
-import logo from "../../assets/images/logo.svg";
-import "./App.css";
+/**
+ * @file App.tsx
+ * @module App
+ * @author Joshua Linehan
+ */
 
-function App() {
+import React from "react";
+import "./App.css";
+import WarningIcon from "../construction/WarningIcon";
+
+/** Master component for web app
+ * @returns {React.ReactElement}
+ * 
+ * @example
+ * // Render app
+ * const root = ReactDOM.createRoot(
+ *   document.getElementById("root") as HTMLElement,
+ * );
+ * root.render(
+ *   <React.StrictMode>
+ *     <App />
+ *   </React.StrictMode>,
+ * );
+ */
+function App(): React.ReactElement {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <WarningIcon
+        size={300}
+        weight={300}
+        color="grey"
+      />
     </div>
   );
 }
