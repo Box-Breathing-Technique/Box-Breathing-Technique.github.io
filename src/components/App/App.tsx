@@ -8,6 +8,7 @@ import React from "react";
 import "./App.css";
 import WarningIcon from "../construction/WarningIcon";
 import WarningMessage from "../construction/WarningMessage";
+import ContactLink from "../construction/ContactLink";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -32,6 +33,7 @@ function App(): React.ReactElement {
                 color="grey"
             />
             <WarningMessage />
+            <ContactLink />
         </div>
     );
 }
