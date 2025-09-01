@@ -10,7 +10,7 @@ import WarningIcon from "../construction/WarningIcon";
 
 /** Master component for web app
  * @returns {React.ReactElement}
- * 
+ *
  * @example
  * // Render app
  * const root = ReactDOM.createRoot(
@@ -23,15 +23,15 @@ import WarningIcon from "../construction/WarningIcon";
  * );
  */
 function App(): React.ReactElement {
-  return (
-    <div className="App">
-      <WarningIcon
-        size={300}
-        weight={300}
-        color="grey"
-      />
-    </div>
-  );
+    return (
+        <div className="App">
+            <WarningIcon
+                size={300}
+                weight={300}
+                color="grey"
+            />
+        </div>
+    );
 }
 
 export default App;
