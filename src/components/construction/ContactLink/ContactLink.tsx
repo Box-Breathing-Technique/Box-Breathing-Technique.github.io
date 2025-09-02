@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file ContactLink.tsx
  * @module ContactLink
  * @author Joshua Linehan

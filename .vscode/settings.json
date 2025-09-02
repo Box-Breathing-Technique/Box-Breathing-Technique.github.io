@@ -11,5 +11,6 @@
         "TTFB",
         "webfonts",
         "wght"
-    ]
+    ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
 }

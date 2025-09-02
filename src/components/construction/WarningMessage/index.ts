@@ -1,1 +1,1 @@
-﻿export { default } from "./WarningMessage";
+export { default } from "./WarningMessage";

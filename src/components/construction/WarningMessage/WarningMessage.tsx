@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file WarningMessage.tsx
  * @module WarningMessage
  * @author Joshua Linehan

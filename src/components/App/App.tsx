@@ -26,7 +26,11 @@ import ContactLink from "../construction/ContactLink";
  */
 function App(): React.ReactElement {
     return (
-        <div className="App">
+        <div
+            className="App"
+            role="main"
+            data-testid="app"
+        >
             <WarningIcon
                 size={300}
                 weight={300}
