@@ -5,17 +5,17 @@ Box Breathing Technique is intended to be a demonstration of React in a web app 
 ## Table of Contents
 
 - [1 - Repository Organisation](#1---repository-organisation)
-  - [1.1 - Branches](#11---branches)
-    - [1.1.1 - main](#111---main)
-    - [1.1.2 - dev](#112---dev)
-    - [1.1.3 - Feature Branches](#113---feature-branches)
-  - [1.2 - Project Management](#12---project-management)
+    - [1.1 - Branches](#11---branches)
+        - [1.1.1 - main](#111---main)
+        - [1.1.2 - dev](#112---dev)
+        - [1.1.3 - Feature Branches](#113---feature-branches)
+    - [1.2 - Project Management](#12---project-management)
 - [2 - Tech Stack](#2---tech-stack)
-  - [2.1 - React](#21---react)
-  - [2.2 - TypeScript](#22---typescript)
-  - [2.3 - npm](#23---npm)
+    - [2.1 - React](#21---react)
+    - [2.2 - TypeScript](#22---typescript)
+    - [2.3 - npm](#23---npm)
 - [3 - CI/CD](#3---cicd)
-  - [3.1 - test](#31---test)
+    - [3.1 - test](#31---test)
 
 ## 1 - Repository Organisation
 
