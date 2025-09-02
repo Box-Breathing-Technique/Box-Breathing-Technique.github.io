@@ -15,3 +15,4 @@ jobs:
                   then
                     echo "Error: Pull request must come from dev branch"
                     exit 1
+                  fi
