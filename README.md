@@ -14,8 +14,10 @@ Box Breathing Technique is intended to be a demonstration of React in a web app 
     - [2.1 - React](#21---react)
     - [2.2 - TypeScript](#22---typescript)
     - [2.3 - npm](#23---npm)
+    - [2.4 - Prettier](#24---prettier)
 - [3 - CI/CD](#3---cicd)
     - [3.1 - test](#31---test)
+    - [3.2 - main-protection](#32---main-protection)
 
 ## 1 - Repository Organisation
 
@@ -37,7 +39,7 @@ New features should be implemented in their own branch created from [dev](#112--
 
 ### 1.2 - Project Management
 
-Tasks will be managed using the [Box Breathing Technique GitHub projects board](https://github.com/orgs/Box-Breathing-Technique/projects/1). Tasks will be added and tracked using this board.
+Tasks will be managed using the [Box Breathing Technique GitHub projects board](https://github.com/orgs/Box-Breathing-Technique/projects/2). Tasks will be added and tracked using this board.
 
 ## 2 - Tech Stack
 
@@ -53,10 +55,18 @@ TypeScript is used to assist in development of the web app.
 
 npm is used to facilitate managing dependencies, building, and testing of the project.
 
+### 2.4 - Prettier
+
+Prettier is the chosen linter for this project. This is used to ensure code is formatted properly.
+
 ## 3 - CI/CD
 
 GitHub Actions is used to facilitate CI/CD workflows.
 
 ### 3.1 - test
 
-[test.yaml](.github/workflows/test.yaml) uses prettier to check files are formatted correctly, then uses npm test to ensure tests pass. This workflow runs on each pull request.
+[test.yaml](.github/workflows/test.yaml) uses prettier to check files are formatted correctly, then uses `npm test` to ensure tests pass. This workflow runs on each pull request.
+
+### 3.2 - main-protection
+
+[main-protection.yaml](.github/workflows/main-protection.yaml) ensures that pull requests into main come from dev. This workflow runs on pull requests into main.
