@@ -1,0 +1,15 @@
+.BreathingAnimationBox {
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    border-width: 1%;
+}
+
+.BreathingAnimationContainer {
+    --max-size: 250px;
+    width: 50vmin;
+    height: 50vmin;
+    max-width: var(--max-size);
+    max-height: var(--max-size);
+}
