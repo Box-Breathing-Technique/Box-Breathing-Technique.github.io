@@ -1,0 +1,16 @@
+{
+    "markdown.extension.toc.levels": "2..6",
+    "markdown.extension.toc.omittedFromToc": {
+        "README.md": [
+            "## Introduction",
+            "## Table of Contents"
+        ]
+    },
+    "cSpell.words": [
+        "opsz",
+        "TTFB",
+        "webfonts",
+        "wght"
+    ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+}
