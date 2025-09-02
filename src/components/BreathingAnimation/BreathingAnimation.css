@@ -1,9 +1,11 @@
 .BreathingAnimationBox {
+    position: relative;
     height: 100%;
     width: 100%;
     border-style: solid;
     border-color: var(--secondary-color);
-    border-width: 1%;
+    border-width: 1px;
+    box-sizing: border-box;
 }
 
 .BreathingAnimationContainer {
@@ -12,4 +14,19 @@
     height: 50vmin;
     max-width: var(--max-size);
     max-height: var(--max-size);
+}
+
+.BreathingAnimationDot {
+    --size: 10%;
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--primary-color);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--secondary-color);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
 }

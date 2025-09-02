@@ -16,7 +16,9 @@ function BreathingAnimation(): React.ReactElement {
             className="BreathingAnimationContainer"
             data-testid="breathing-animation"
         >
-            <div className="BreathingAnimationBox"></div>
+            <div className="BreathingAnimationBox">
+                <div className="BreathingAnimationDot"></div>
+            </div>
         </div>
     );
 }
