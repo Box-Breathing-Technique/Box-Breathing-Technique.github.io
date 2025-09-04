@@ -16,13 +16,13 @@ interface BreathingAnimationProps {
 
 /** Animation that demonstrates the box breathing technique
  *
- * @property {number?} [inDuration=4] How long the dot takes to move along the
+ * @property {number} [inDuration=4] How long the dot takes to move along the
  * left side of the box, i.e. the breathe in duration
- * @property {number?} [holdInDuration=4] How long the dot takes to move along
+ * @property {number} [holdInDuration=4] How long the dot takes to move along
  * the top of the box, i.e. the hold breath in duration
- * @property {number?} [outDuration=4] How long the dot takes to move along the
+ * @property {number} [outDuration=4] How long the dot takes to move along the
  * right side of the box, i.e. the breathe out duration
- * @property {number?} [holdOutDuration=4] How long the dot takes to move along
+ * @property {number} [holdOutDuration=4] How long the dot takes to move along
  * the bottom of the box, i.e. the hold breath out duration
  * @returns {React.ReactElement}
  *
