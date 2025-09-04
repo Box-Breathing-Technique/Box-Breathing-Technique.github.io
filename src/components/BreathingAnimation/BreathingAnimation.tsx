@@ -45,21 +45,16 @@ function BreathingAnimation({
     outDuration = 4,
     holdOutDuration = 4,
 }: BreathingAnimationProps): React.ReactElement {
-    // set animation duration
+    // calculate percentages for animation
     const animationDuration: number =
         inDuration + holdInDuration + outDuration + holdOutDuration;
-    const breathingAnimationDotStyle: React.CSSProperties = {
-        "--animation-duration": `${animationDuration}s`,
-    } as React.CSSProperties;
-
-    // calculate percentages for animation
     const inPercentage: number = inDuration / animationDuration;
     const holdInPercentage: number =
         holdInDuration / animationDuration + inPercentage;
     const outPercentage: number =
         outDuration / animationDuration + holdInPercentage;
 
-    // set animation
+    // set dot animation
     const animationTimingFunction: string = "cubic-bezier(0.4, 0.1, 0.6, 0.9)";
     const dotRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -110,6 +105,51 @@ function BreathingAnimation({
         };
     });
 
+    // set gradient animation
+    const gradientRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        const gradient = gradientRef.current;
+        if (!gradient) return;
+        const keyframes: Keyframe[] = [
+            {
+                height: "0%",
+                easing: animationTimingFunction,
+                offset: 0,
+            },
+            {
+                height: "100%",
+                easing: animationTimingFunction,
+                offset: inPercentage,
+            },
+            {
+                height: "100%",
+                easing: animationTimingFunction,
+                offset: holdInPercentage,
+            },
+            {
+                height: "0%",
+                easing: animationTimingFunction,
+                offset: outPercentage,
+            },
+            {
+                height: "0%",
+                easing: animationTimingFunction,
+                offset: 1,
+            },
+        ];
+
+        const animation = gradient.animate(keyframes, {
+            duration: animationDuration * 1000,
+            iterations: Infinity,
+            easing: "linear",
+        });
+
+        // cleanup
+        return () => {
+            animation.cancel();
+        };
+    });
+
     return (
         <div
             className="BreathingAnimationContainer"
@@ -117,9 +157,12 @@ function BreathingAnimation({
         >
             <div className="BreathingAnimationBox">
                 <div
+                    className="BreathingAnimationGradient"
+                    ref={gradientRef}
+                ></div>
+                <div
                     className="BreathingAnimationDot"
                     ref={dotRef}
-                    style={breathingAnimationDotStyle}
                 ></div>
             </div>
         </div>
