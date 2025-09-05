@@ -1,0 +1,23 @@
+.BreathingAnimationText {
+    transition: all 1000ms;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 15cqw;
+    letter-spacing: 1cqw;
+}
+
+.BreathingAnimationText.before {
+    transform: translate(-50%, -50%) translateY(-100%) rotateX(-90deg);
+    opacity: 0;
+}
+
+.BreathingAnimationText.active {
+    transform: translate(-50%, -50%) translateY(0%) rotateX(0deg);
+    opacity: 1;
+}
+
+.BreathingAnimationText.after {
+    transform: translate(-50%, -50%) translateY(100%) rotateX(90deg);
+    opacity: 0;
+}
