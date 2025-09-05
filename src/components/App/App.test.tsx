@@ -1,3 +1,9 @@
+/**
+ * @file App.test.tsx
+ * @module App
+ * @author Joshua Linehan
+ */
+
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";

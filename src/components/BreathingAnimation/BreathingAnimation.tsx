@@ -7,9 +7,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./BreathingAnimation.css";
 import BreathingAnimationText from "./BreathingAnimationText";
+import { NUM_PHASES, Phase, START_PHASE } from "./Phases";
 
 const MS_IN_SEC: number = 1000;
-const NUM_PHASES = 4;
 
 interface BreathingAnimationProps {
     inDuration?: number;
@@ -50,7 +50,7 @@ function BreathingAnimation({
     holdOutDuration = 4,
 }: BreathingAnimationProps): React.ReactElement {
     // set phase cycle
-    const [phase, setPhase] = useState(-1); // starting with an "invalid" value
+    const [phase, setPhase] = useState<Phase>(START_PHASE); // starting with an "invalid" value
     // allows elements to start in default positions without a CSS subclass
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     useEffect(() => {
@@ -65,7 +65,7 @@ function BreathingAnimation({
         }
 
         timeoutRef.current = setTimeout(() => {
-            const nextPhase: number = (phase + 1) % NUM_PHASES;
+            const nextPhase: Phase = ((phase + 1) % NUM_PHASES) as Phase;
             setPhase(nextPhase);
         }, phases[phase] * MS_IN_SEC);
 
@@ -113,25 +113,21 @@ function BreathingAnimation({
                     text={"BREATHE IN"}
                     activePhase={0}
                     currentPhase={phase}
-                    totalPhases={NUM_PHASES}
                 />
                 <BreathingAnimationText
                     text={"HOLD"}
                     activePhase={1}
                     currentPhase={phase}
-                    totalPhases={NUM_PHASES}
                 />
                 <BreathingAnimationText
                     text={"BREATHE OUT"}
                     activePhase={2}
                     currentPhase={phase}
-                    totalPhases={NUM_PHASES}
                 />
                 <BreathingAnimationText
                     text={"HOLD"}
                     activePhase={3}
                     currentPhase={phase}
-                    totalPhases={NUM_PHASES}
                 />
                 <div
                     className={`BreathingAnimationDot phase${phase}`}
