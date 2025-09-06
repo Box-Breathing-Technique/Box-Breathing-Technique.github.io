@@ -1,6 +1,8 @@
 # Box Breathing Technique
 
-Box Breathing Technique is intended to be a demonstration of React in a web app to create a visualisation of the box breathing technique. The box breathing technique, or square breathing technique, is a controlled breathing technique used to manage anxiety. For more information on the box breathing technique, visit https://www.blackdoginstitute.org.au/wp-content/uploads/2021/05/Square-Breathing-Resource-Guide.pdf.
+Box Breathing Technique is intended to be a demonstration of React in a web app to create a visualisation of the box breathing technique. The box breathing technique, or square breathing technique, is a controlled breathing technique used to manage anxiety. For more information on the box breathing technique, visit https://mensline.org.au/deal-with-anxiety/breathing-exercises-for-reducing-stress-and-anxiety/.
+
+This project was inspired by https://lassebomh.github.io/box-breathing/.
 
 ## Table of Contents
 
