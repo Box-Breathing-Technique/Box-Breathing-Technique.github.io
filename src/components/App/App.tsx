@@ -6,6 +6,7 @@
 
 import React from "react";
 import "./App.css";
+import BreathingAnimation from "../BreathingAnimation";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -27,7 +28,9 @@ function App(): React.ReactElement {
             className="App"
             role="main"
             data-testid="app"
-        ></div>
+        >
+            <BreathingAnimation />
+        </div>
     );
 }
 
