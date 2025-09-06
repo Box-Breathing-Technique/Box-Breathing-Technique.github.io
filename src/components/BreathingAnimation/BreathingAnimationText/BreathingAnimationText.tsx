@@ -6,7 +6,7 @@
 
 import React from "react";
 import "./BreathingAnimationText.css";
-import { Phase, NUM_PHASES } from "../Phases";
+import { Phase, NUM_PHASES, START_PHASE } from "../Phases";
 
 export const testId: string = "breathing-animation-text";
 
@@ -48,6 +48,8 @@ function BreathingAnimationText({
                     subclass = "active";
                 } else if (currentPhase === (activePhase + 1) % NUM_PHASES) {
                     subclass = "after";
+                } else if (currentPhase === START_PHASE) {
+                    subclass = "none";
                 } else {
                     subclass = "before";
                 }

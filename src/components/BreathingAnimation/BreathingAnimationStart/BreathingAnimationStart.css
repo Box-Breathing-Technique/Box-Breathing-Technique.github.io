@@ -1,0 +1,15 @@
+.BreathingAnimationStart {
+    all: unset;
+    transition-duration: 0s;
+}
+
+.BreathingAnimationStart:hover {
+    transform: translateY(-10%);
+    transition: transform 0.5s;
+}
+
+.BreathingAnimationStart.start-triggered {
+    --start-delay: 1.5;
+    transition: opacity calc(var(--start-delay) * 1s);
+    opacity: 0;
+}

@@ -6,6 +6,15 @@
     --transition-timing-function: ease-in-out;
 }
 
+.BreathingAnimationContainer {
+    --max-size: 250px;
+    container-type: inline-size;
+    container-name: breathing-animation;
+    width: 50vmin;
+    height: 50vmin;
+    max-width: var(--max-size);
+    max-height: var(--max-size);
+}
 .BreathingAnimationBox {
     position: relative;
     height: 100%;
@@ -16,18 +25,17 @@
     box-sizing: border-box;
 }
 
-.BreathingAnimationContainer {
-    --max-size: 250px;
-    container-type: inline-size;
-    container-name: breathing-animation;
-    width: 50vmin;
-    height: 50vmin;
-    max-width: var(--max-size);
-    max-height: var(--max-size);
+.BreathingAnimationTextContainer {
+    font-size: 15cqw;
+    letter-spacing: 2cqw;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .BreathingAnimationDot {
     --size: 10%;
+    --start-delay: 1.5;
     position: absolute;
     width: var(--size);
     height: var(--size);
@@ -39,6 +47,9 @@
     top: 100%;
     left: 0%;
     transform: translate(-50%, -50%);
+    opacity: 1;
+    transition-duration: calc(var(--start-delay) * 1s);
+    transition-timing-function: linear;
 }
 
 .BreathingAnimationDot.phase0 {
@@ -69,6 +80,11 @@
     transition-timing-function: var(--transition-timing-function);
 }
 
+.BreathingAnimationDot.hidden {
+    opacity: 0;
+    transition-duration: 0s;
+}
+
 .BreathingAnimationGradient {
     --gradient-color: rgba(0, 150, 255, 0.8);
     position: absolute;
@@ -78,6 +94,7 @@
     height: 0%;
     width: 100%;
     border-top: 1px solid var(--secondary-color);
+    transition-duration: 0s;
 }
 
 .BreathingAnimationGradient.in {

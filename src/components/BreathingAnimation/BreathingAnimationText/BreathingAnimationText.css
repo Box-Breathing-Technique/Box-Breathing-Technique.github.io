@@ -1,23 +1,30 @@
 .BreathingAnimationText {
-    transition: all 1000ms;
+    --transition-duration: 1s;
+    transition-duration: 0s;
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 15cqw;
-    letter-spacing: 1cqw;
-}
-
-.BreathingAnimationText.before {
     transform: translate(-50%, -50%) translateY(-100%) rotateX(-90deg);
     opacity: 0;
 }
 
+.BreathingAnimationText.before {
+    display: inline;
+    transform: translate(-50%, -50%) translateY(-100%) rotateX(-90deg);
+    transition-duration: var(--transition-duration);
+    opacity: 0;
+}
+
 .BreathingAnimationText.active {
+    display: inline;
     transform: translate(-50%, -50%) translateY(0%) rotateX(0deg);
+    transition-duration: var(--transition-duration);
     opacity: 1;
 }
 
 .BreathingAnimationText.after {
+    display: inline;
     transform: translate(-50%, -50%) translateY(100%) rotateX(90deg);
+    transition-duration: var(--transition-duration);
     opacity: 0;
 }

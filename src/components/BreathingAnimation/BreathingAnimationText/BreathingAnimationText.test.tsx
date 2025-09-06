@@ -4,7 +4,7 @@
  * @author Joshua Linehan
  */
 
-import React, { useState } from "react";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import BreathingAnimationText, { testId } from "./BreathingAnimationText";
 import { Phase, START_PHASE } from "../Phases";
@@ -104,7 +104,7 @@ describe("BreathingAnimationText", () => {
         );
         const component: HTMLElement = screen.getByTestId(testId);
         expect(component).toHaveClass("BreathingAnimationText");
-        expect(component).toHaveClass(before);
+        expect(component).not.toHaveClass(before);
         expect(component).not.toHaveClass(active);
         expect(component).not.toHaveClass(after);
     });
