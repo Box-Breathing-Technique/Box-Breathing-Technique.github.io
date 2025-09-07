@@ -4,10 +4,21 @@
  * @author Joshua Linehan
  */
 
-import React, { useEffect, useState, useRef } from "react";
+import React, {
+    useEffect,
+    useState,
+    useRef,
+    useImperativeHandle,
+    forwardRef,
+} from "react";
 import "./BreathingAnimation.css";
 import BreathingAnimationText from "./BreathingAnimationText";
-import { NUM_PHASES, Phase, START_PHASE } from "./BreathingAnimation.types";
+import {
+    BreathingAnimationResetRef,
+    NUM_PHASES,
+    Phase,
+    START_PHASE,
+} from "./BreathingAnimation.types";
 import BreathingAnimationStart from "./BreathingAnimationStart";
 import { MS_IN_SEC } from "../../constants";
 
@@ -31,6 +42,8 @@ interface BreathingAnimationProps {
  * right side of the box in seconds, i.e. the breathe out duration
  * @property {number} [holdOutDuration=4] How long the dot takes to move along
  * the bottom of the box in seconds, i.e. the hold breath out duration
+ * @property {React.Ref<BreathingAnimationResetRef>} ref Ref object to access
+ * reset function
  * @returns {React.ReactElement}
  *
  * @example
@@ -45,13 +58,21 @@ interface BreathingAnimationProps {
  *     outDuration={5}
  *     holdOutDuration={2}
  * />
+ *
+ * @example
+ * // With ref to reset function
+ * const resetRef = useRef<BreathingAnimationResetRef>(null);
+ * <BreathingAnimation ref={resetRef} />
  */
-function BreathingAnimation({
-    inDuration = 4,
-    holdInDuration = 4,
-    outDuration = 4,
-    holdOutDuration = 4,
-}: BreathingAnimationProps): React.ReactElement {
+function BreathingAnimation(
+    {
+        inDuration = 4,
+        holdInDuration = 4,
+        outDuration = 4,
+        holdOutDuration = 4,
+    }: BreathingAnimationProps,
+    ref: React.Ref<BreathingAnimationResetRef>,
+): React.ReactElement {
     // set phase cycle
     const [phase, setPhase] = useState<Phase>(START_PHASE); /* starting with an
     "invalid" value allows elements to start in default positions without a CSS
@@ -107,6 +128,15 @@ function BreathingAnimation({
         setActive(false);
         setPhase(START_PHASE);
     };
+
+    // expose reset function via ref
+    useImperativeHandle(
+        ref,
+        () => ({
+            reset,
+        }),
+        [],
+    );
 
     // set phase transition style
     const phaseTransitionStyles: React.CSSProperties = {
@@ -186,4 +216,4 @@ function BreathingAnimation({
     );
 }
 
-export default BreathingAnimation;
+export default forwardRef(BreathingAnimation);

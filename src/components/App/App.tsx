@@ -4,11 +4,12 @@
  * @author Joshua Linehan
  */
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 import BreathingAnimation from "../BreathingAnimation";
 import Panel from "../Panel";
-import { AppState, PanelState } from "../../types";
+import { AppState } from "../../types";
+import { BreathingAnimationResetRef } from "../BreathingAnimation/BreathingAnimation.types";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -26,6 +27,12 @@ import { AppState, PanelState } from "../../types";
  */
 function App(): React.ReactElement {
     const [appState, setAppState] = useState<AppState>("animation");
+    const resetRef = useRef<BreathingAnimationResetRef>(null);
+
+    const resetBreathingAnimation: () => void = () => {
+        resetRef.current?.reset();
+    };
+
     return (
         <div
             className="App"
@@ -46,7 +53,7 @@ function App(): React.ReactElement {
                 }}
                 state={appState}
             >
-                <BreathingAnimation />
+                <BreathingAnimation ref={resetRef} />
             </Panel>
         </div>
     );
