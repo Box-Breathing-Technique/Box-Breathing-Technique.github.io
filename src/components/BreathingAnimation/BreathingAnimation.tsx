@@ -7,7 +7,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./BreathingAnimation.css";
 import BreathingAnimationText from "./BreathingAnimationText";
-import { NUM_PHASES, Phase, START_PHASE } from "./Phases";
+import { NUM_PHASES, Phase, START_PHASE } from "./BreathingAnimation.types";
 import BreathingAnimationStart from "./BreathingAnimationStart";
 import { MS_IN_SEC } from "../../constants";
 

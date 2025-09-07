@@ -1,6 +1,6 @@
 /**
- * @file phases.ts
- * @module Phases
+ * @file BreathingAnimation.types.ts
+ * @module BreathingAnimation
  * @author Joshua Linehan
  *
  * Provides the union type Phase and related constants to control breathing
