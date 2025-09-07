@@ -28,6 +28,10 @@ import { BreathingAnimationResetRef } from "../BreathingAnimation/BreathingAnima
 function App(): React.ReactElement {
     const [appState, setAppState] = useState<AppState>("animation");
     const resetRef = useRef<BreathingAnimationResetRef>(null);
+    const [
+        breathingAnimationGradientColor,
+        setBreathingAnimationGradientColor,
+    ] = useState<string>("#0096ffcc");
 
     const resetBreathingAnimation: () => void = () => {
         resetRef.current?.reset();
@@ -53,7 +57,10 @@ function App(): React.ReactElement {
                 }}
                 state={appState}
             >
-                <BreathingAnimation ref={resetRef} />
+                <BreathingAnimation
+                    ref={resetRef}
+                    gradientColor={breathingAnimationGradientColor}
+                />
             </Panel>
         </div>
     );

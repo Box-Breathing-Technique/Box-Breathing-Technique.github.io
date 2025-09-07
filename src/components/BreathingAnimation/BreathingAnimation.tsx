@@ -29,6 +29,7 @@ interface BreathingAnimationProps {
     holdInDuration?: number;
     outDuration?: number;
     holdOutDuration?: number;
+    gradientColor?: string;
 }
 
 /** Animation that demonstrates the box breathing technique. Controls state of
@@ -42,6 +43,8 @@ interface BreathingAnimationProps {
  * right side of the box in seconds, i.e. the breathe out duration
  * @property {number} [holdOutDuration=4] How long the dot takes to move along
  * the bottom of the box in seconds, i.e. the hold breath out duration
+ * @property {string} [gradientColor] The value --gradient-color is set to in
+ * CSS. Determines color of breathing animation.
  * @property {React.Ref<BreathingAnimationResetRef>} ref Ref object to access
  * reset function
  * @returns {React.ReactElement}
@@ -57,6 +60,7 @@ interface BreathingAnimationProps {
  *     holdInDuration={2}
  *     outDuration={5}
  *     holdOutDuration={2}
+ *     gradientColor={white}
  * />
  *
  * @example
@@ -70,6 +74,7 @@ function BreathingAnimation(
         holdInDuration = 4,
         outDuration = 4,
         holdOutDuration = 4,
+        gradientColor,
     }: BreathingAnimationProps,
     ref: React.Ref<BreathingAnimationResetRef>,
 ): React.ReactElement {
@@ -139,7 +144,7 @@ function BreathingAnimation(
     );
 
     // set phase transition style
-    const phaseTransitionStyles: React.CSSProperties = {
+    const phaseTransitionStyle: React.CSSProperties = {
         "--in-duration": inDuration,
         "--hold-in-duration": holdInDuration,
         "--out-duration": outDuration,
@@ -148,8 +153,13 @@ function BreathingAnimation(
     } as React.CSSProperties;
 
     // set start transition style
-    const startStyles: React.CSSProperties = {
+    const startStyle: React.CSSProperties = {
         "--start-delay": startDelay,
+    } as React.CSSProperties;
+
+    // set gradient colour
+    const gradientStyle: React.CSSProperties = {
+        "--gradient-color": gradientColor,
     } as React.CSSProperties;
 
     return (
@@ -173,7 +183,7 @@ function BreathingAnimation(
                                 return "";
                         }
                     })()}`}
-                    style={phaseTransitionStyles}
+                    style={{ ...phaseTransitionStyle, ...gradientStyle }}
                 ></div>
                 <div className="BreathingAnimationTextContainer">
                     <BreathingAnimationText
@@ -209,7 +219,7 @@ function BreathingAnimation(
                 </div>
                 <div
                     className={`BreathingAnimationDot phase${phase} ${startTriggered ? "" : "hidden"}`}
-                    style={{ ...phaseTransitionStyles, ...startStyles }}
+                    style={{ ...phaseTransitionStyle, ...startStyle }}
                 ></div>
             </div>
         </div>
