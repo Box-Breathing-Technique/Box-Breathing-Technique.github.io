@@ -10,11 +10,12 @@ import React, {
     useRef,
     useImperativeHandle,
     forwardRef,
+    RefObject,
 } from "react";
 import "./BreathingAnimation.css";
 import BreathingAnimationText from "./BreathingAnimationText";
 import {
-    BreathingAnimationResetRef,
+    BreathingAnimationRef,
     NUM_PHASES,
     Phase,
     START_PHASE,
@@ -45,8 +46,8 @@ interface BreathingAnimationProps {
  * the bottom of the box in seconds, i.e. the hold breath out duration
  * @property {string} [gradientColor] The value --gradient-color is set to in
  * CSS. Determines color of breathing animation.
- * @property {React.Ref<BreathingAnimationResetRef>} ref Ref object to access
- * reset function
+ * @property {React.Ref<BreathingAnimationRef>} ref Ref object to access
+ * internal functions
  * @returns {React.ReactElement}
  *
  * @example
@@ -76,7 +77,7 @@ function BreathingAnimation(
         holdOutDuration = 4,
         gradientColor,
     }: BreathingAnimationProps,
-    ref: React.Ref<BreathingAnimationResetRef>,
+    ref: React.Ref<BreathingAnimationRef>,
 ): React.ReactElement {
     // set phase cycle
     const [phase, setPhase] = useState<Phase>(START_PHASE); /* starting with an
@@ -134,14 +135,12 @@ function BreathingAnimation(
         setPhase(START_PHASE);
     };
 
-    // expose reset function via ref
-    useImperativeHandle(
-        ref,
-        () => ({
-            reset,
-        }),
-        [],
-    );
+    // expose reset and text container via ref
+    const textContainerRef = useRef<HTMLElement>(null);
+    useImperativeHandle(ref, () => ({
+        reset: reset,
+        textContainerRef: textContainerRef,
+    }));
 
     // set phase transition style
     const phaseTransitionStyle: React.CSSProperties = {
@@ -185,7 +184,10 @@ function BreathingAnimation(
                     })()}`}
                     style={{ ...phaseTransitionStyle, ...gradientStyle }}
                 ></div>
-                <div className="BreathingAnimationTextContainer">
+                <div
+                    className="BreathingAnimationTextContainer"
+                    ref={textContainerRef as RefObject<HTMLDivElement>}
+                >
                     <BreathingAnimationText
                         text={"BREATHE\nIN"}
                         activePhase={0}

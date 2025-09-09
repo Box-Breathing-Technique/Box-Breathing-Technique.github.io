@@ -1,11 +1,10 @@
 .BreathingAnimationStart {
-    all: unset;
-    transition-duration: 0s;
+    color: var(--tertiary-color);
+    transition-duration: transform 0s;
 }
 
 .BreathingAnimationStart:hover {
-    transform: translateY(-10%);
-    transition: transform 0.5s;
+    color: var(--secondary-color);
 }
 
 .BreathingAnimationStart.start-triggered {

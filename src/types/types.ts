@@ -11,3 +11,11 @@ export type PanelState = "above" | "display" | "below";
 
 /** Describes the current content displayed by the app */
 export type AppState = "settings" | "animation" | "about";
+
+/** Used to store information about fonts */
+export interface FontInfo {
+    /** CSS font-size */
+    fontSize: string;
+    /** CSS letter-spacing */
+    letterSpacing: string;
+}

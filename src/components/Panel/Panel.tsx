@@ -17,6 +17,7 @@ interface PanelProps {
 }
 
 /** Swappable panel that controls what is displayed on screen
+ *
  * @property {React.ReactNode} children The child components to render within
  * the panel
  * @property {(AppState) => PanelState} stateFunction Function that returns the

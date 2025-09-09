@@ -9,7 +9,6 @@
 .BreathingAnimationContainer {
     --max-size: 250px;
     container-type: inline-size;
-    container-name: breathing-animation;
     width: 50vmin;
     height: 50vmin;
     max-width: var(--max-size);

@@ -1,0 +1,8 @@
+.PanelTransitionButton {
+    text-align: center;
+    color: var(--tertiary-color);
+}
+
+.PanelTransitionButton:hover {
+    color: var(--secondary-color);
+}
