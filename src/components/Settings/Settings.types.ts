@@ -16,11 +16,10 @@ export interface SettingInputProps {
 
 export interface SettingNoteProps {
     text?: string;
-    hidden?: boolean;
 }
 
 export interface SettingsItem {
     description: SettingDescriptionProps;
     input: SettingInputProps;
-    note?: SettingNoteProps;
+    note: SettingNoteProps;
 }

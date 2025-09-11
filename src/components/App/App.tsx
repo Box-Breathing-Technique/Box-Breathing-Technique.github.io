@@ -105,13 +105,42 @@ function App(): React.ReactElement {
                 <Settings
                     settingsItems={[
                         {
-                            description: { text: "desc1" },
+                            description: {
+                                text: "Breathe In Duration (seconds)",
+                            },
                             input: { type: "text" },
+                            note: {},
                         },
                         {
-                            description: { text: "desc2" },
+                            description: {
+                                text: "Hold Breath In Duration (seconds)",
+                            },
                             input: { type: "text" },
                             note: { text: "note2" },
+                        },
+                        {
+                            description: {
+                                text: "Breathe Out Duration (seconds)",
+                            },
+                            input: { type: "text" },
+                            note: {},
+                        },
+                        {
+                            description: {
+                                text: "Hold Breath Out Duration (seconds)",
+                            },
+                            input: { type: "text" },
+                            note: {},
+                        },
+                        {
+                            description: { text: "Colour" },
+                            input: { type: "text" },
+                            note: {},
+                        },
+                        {
+                            description: { text: "Show Timer" },
+                            input: { type: "text" },
+                            note: {},
                         },
                     ]}
                 />

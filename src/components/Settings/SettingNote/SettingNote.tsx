@@ -10,15 +10,11 @@ import { SettingNoteProps } from "../Settings.types";
 
 export const testId: string = "setting-note";
 
-const emptyText: string = "empty";
-
 /**
  * @returns {React.ReactElement}
  */
-function SettingNote({
-    text = emptyText,
-    hidden = false,
-}: SettingNoteProps): React.ReactElement {
+function SettingNote({ text }: SettingNoteProps): React.ReactElement {
+    const hidden: boolean = text ? false : true;
     return (
         <div
             className={`SettingNote ${hidden ? "hidden" : ""}`}

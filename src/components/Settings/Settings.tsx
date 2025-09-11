@@ -4,7 +4,7 @@
  * @author Joshua Linehan
  */
 
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useRef } from "react";
 import "./Settings.css";
 import { SettingsItem } from "./Settings.types";
 import SettingDescription from "./SettingDescription";
@@ -25,48 +25,55 @@ function Settings({ settingsItems }: SettingsProps): React.ReactElement {
     const descriptions: ReactElement[] = [];
     const inputs: ReactElement[] = [];
     const notes: ReactElement[] = [];
-    settingsItems.forEach((value) => {
-        descriptions.push(SettingDescription(value.description));
-        inputs.push(SettingInput(value.input));
+    settingsItems.forEach((value, index) => {
+        descriptions.push(
+            <SettingDescription
+                key={`desc-${index}`}
+                {...value.description}
+            />,
+        );
+        inputs.push(
+            <SettingInput
+                key={`input-${index}`}
+                {...value.input}
+            />,
+        );
         notes.push(
-            value.note
-                ? SettingNote(value.note)
-                : SettingNote({ hidden: true }),
+            <SettingNote
+                key={`note-${index}`}
+                {...value.note}
+            />,
         );
     });
 
-    // give SettingsContainer width to NotesContainer
-    const settingsContainerRef = useRef<HTMLDivElement>(null);
-    const [settingsContainerWidth, setSettingsContainerWidth] = useState(0);
-    useEffect(() => {
-        if (!settingsContainerRef) {
-            return;
-        }
-        const settingsContainer = settingsContainerRef.current;
-        setSettingsContainerWidth(settingsContainer?.clientWidth ?? 0);
-    }, []);
-    const notesContainerStyle: React.CSSProperties = {
-        transform: `translateX(${settingsContainerWidth / 2}px) translateX(-25%)`,
+    // centre description and input columns
+    const settingsRef = useRef<HTMLDivElement | null>(null);
+    const alignmentRef = useRef<HTMLDivElement | null>(null);
+    const targetPosition =
+        (alignmentRef.current?.clientLeft ?? 0) +
+        (alignmentRef.current?.clientWidth ?? 0) / 2;
+    const actualPosition =
+        (settingsRef.current?.clientLeft ?? 0) +
+        (settingsRef.current?.clientWidth ?? 0) / 2;
+    const offset = actualPosition - targetPosition;
+    const settingsStyle: React.CSSProperties = {
+        transform: `translate(-50%, -50%) translateX(${offset}px)`,
     };
 
     return (
         <div
             className="Settings"
             data-testid="settings"
+            style={settingsStyle}
+            ref={settingsRef}
         >
+            {descriptions}
+            {inputs}
+            {notes}
             <div
-                className="SettingsContainer"
-                ref={settingsContainerRef}
-            >
-                {descriptions}
-                {inputs}
-            </div>
-            <div
-                className="NotesContainer"
-                style={notesContainerStyle}
-            >
-                {notes}
-            </div>
+                className="AlignmentElement"
+                ref={alignmentRef}
+            />
         </div>
     );
 }

@@ -1,3 +1,4 @@
 .SettingDescription {
     grid-column: 1;
+    justify-self: right;
 }

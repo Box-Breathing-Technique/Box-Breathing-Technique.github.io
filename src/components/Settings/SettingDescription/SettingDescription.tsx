@@ -10,7 +10,9 @@ import { SettingDescriptionProps } from "../Settings.types";
 
 export const testId: string = "setting-description";
 
-/**
+/** Description for a settings item
+ *
+ * @property {string} text The description of the setting item
  * @returns {React.ReactElement}
  */
 function SettingDescription({

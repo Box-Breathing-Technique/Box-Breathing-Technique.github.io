@@ -2,23 +2,22 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-.SettingsContainer {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+        sans-serif;
     display: grid;
     grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+    column-gap: 5px;
+    row-gap: 5px;
 }
 
-.NotesContainer {
-    position: relative;
-    display: grid;
-    grid-auto-flow: row;
+.AlignmentElement {
+    position: absolute;
+    grid-column: 1 / 3;
+    visibility: hidden;
+    height: 100%;
+    width: 100%;
 }

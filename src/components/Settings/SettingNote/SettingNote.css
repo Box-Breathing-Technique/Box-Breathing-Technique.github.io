@@ -1,4 +1,5 @@
 .SettingNote {
+    grid-column: 3;
 }
 
 .SettingNote.hidden {
