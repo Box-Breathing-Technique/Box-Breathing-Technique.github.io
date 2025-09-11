@@ -4,7 +4,7 @@
  * @author Joshua Linehan
  */
 
-import React, { RefObject } from "react";
+import { RefObject } from "react";
 
 export type Phase = -1 | 0 | 1 | 2 | 3;
 export const START_PHASE: Phase = -1;

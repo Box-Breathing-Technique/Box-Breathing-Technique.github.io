@@ -1,0 +1,6 @@
+.SettingNote {
+}
+
+.SettingNote.hidden {
+    visibility: hidden;
+}

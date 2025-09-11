@@ -7,7 +7,6 @@
 import React from "react";
 import "./PanelTransitionButton.css";
 import { FontInfo } from "../../types";
-import { useTextStyle } from "../../hooks";
 
 export const testId: string = "panel-transition-button";
 

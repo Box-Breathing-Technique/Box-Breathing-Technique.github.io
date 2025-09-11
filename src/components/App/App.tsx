@@ -12,6 +12,7 @@ import { AppState } from "../../types";
 import { BreathingAnimationRef } from "../BreathingAnimation/BreathingAnimation.types";
 import PanelTransitionButton from "../PanelTransitionButton";
 import { useTextStyle } from "../../hooks";
+import Settings from "../Settings";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -52,6 +53,7 @@ function App(): React.ReactElement {
             role="main"
             data-testid="app"
         >
+            {/* about panel */}
             {/* animation panel */}
             <Panel
                 stateFunction={(appState) => {
@@ -99,6 +101,19 @@ function App(): React.ReactElement {
                     label={"DONE"}
                     onClick={() => setAppState("animation")}
                     fontInfo={fontInfo}
+                />
+                <Settings
+                    settingsItems={[
+                        {
+                            description: { text: "desc1" },
+                            input: { type: "text" },
+                        },
+                        {
+                            description: { text: "desc2" },
+                            input: { type: "text" },
+                            note: { text: "note2" },
+                        },
+                    ]}
                 />
             </Panel>
         </div>
