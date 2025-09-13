@@ -12,6 +12,9 @@ export interface SettingDescriptionProps {
 
 export interface SettingInputProps {
     type: SettingInputType;
+    placeholder?: string;
+    handleInput: (value: string) => void;
+    validateInput?: (input: string) => boolean;
 }
 
 export interface SettingNoteProps {

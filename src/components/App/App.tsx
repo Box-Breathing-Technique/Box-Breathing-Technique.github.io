@@ -108,38 +108,80 @@ function App(): React.ReactElement {
                             description: {
                                 text: "Breathe In Duration (seconds)",
                             },
-                            input: { type: "text" },
+                            input: {
+                                type: "text",
+                                placeholder: "4.0",
+                                handleInput: (value) => {
+                                    resetBreathingAnimation();
+                                    console.log(`typed ${value}`);
+                                },
+                            },
                             note: {},
                         },
                         {
                             description: {
                                 text: "Hold Breath In Duration (seconds)",
                             },
-                            input: { type: "text" },
+                            input: {
+                                type: "text",
+                                placeholder: "4.0",
+                                handleInput: (value) => {
+                                    resetBreathingAnimation();
+                                    console.log(`typed ${value}`);
+                                },
+                            },
                             note: { text: "note2" },
                         },
                         {
                             description: {
                                 text: "Breathe Out Duration (seconds)",
                             },
-                            input: { type: "text" },
+                            input: {
+                                type: "text",
+                                placeholder: "4.0",
+                                handleInput: (value) => {
+                                    resetBreathingAnimation();
+                                    console.log(`typed ${value}`);
+                                },
+                            },
                             note: {},
                         },
                         {
                             description: {
                                 text: "Hold Breath Out Duration (seconds)",
                             },
-                            input: { type: "text" },
+                            input: {
+                                type: "text",
+                                placeholder: "4.0",
+                                handleInput: (value) => {
+                                    resetBreathingAnimation();
+                                    console.log(`typed ${value}`);
+                                },
+                            },
                             note: {},
                         },
                         {
                             description: { text: "Colour" },
-                            input: { type: "text" },
+                            input: {
+                                type: "text",
+                                placeholder: "#0096ffcc",
+                                handleInput: (value) => {
+                                    resetBreathingAnimation();
+                                    console.log(`typed ${value}`);
+                                },
+                            },
                             note: {},
                         },
                         {
                             description: { text: "Show Timer" },
-                            input: { type: "text" },
+                            input: {
+                                type: "text",
+                                placeholder: "no",
+                                handleInput: (value) => {
+                                    resetBreathingAnimation();
+                                    console.log(`typed ${value}`);
+                                },
+                            },
                             note: {},
                         },
                     ]}
