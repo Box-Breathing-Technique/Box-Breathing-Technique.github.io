@@ -14,6 +14,9 @@ import PanelTransitionButton from "../PanelTransitionButton";
 import { useTextStyle } from "../../hooks";
 import Settings from "../Settings";
 
+const DEFAULT_COLOUR: string = "#0096ffcc";
+const DEFAULT_BREATH_DURATION: number = 4.0;
+
 /** Master component for web app
  * @returns {React.ReactElement}
  *
@@ -34,7 +37,7 @@ function App(): React.ReactElement {
     const [
         breathingAnimationGradientColor,
         setBreathingAnimationGradientColor,
-    ] = useState<string>("#0096ffcc");
+    ] = useState<string>(DEFAULT_COLOUR);
 
     const resetBreathingAnimation: () => void = () => {
         breathingAnimationRef.current?.reset();
@@ -45,6 +48,19 @@ function App(): React.ReactElement {
             () => breathingAnimationRef.current?.textContainerRef.current,
             [],
         ),
+    );
+
+    const [inDuration, setInDuration] = useState<number>(
+        DEFAULT_BREATH_DURATION,
+    );
+    const [holdInDuration, setHoldInDuration] = useState<number>(
+        DEFAULT_BREATH_DURATION,
+    );
+    const [outDuration, setOutDuration] = useState<number>(
+        DEFAULT_BREATH_DURATION,
+    );
+    const [holdOutDuration, setHoldOutDuration] = useState<number>(
+        DEFAULT_BREATH_DURATION,
     );
 
     return (
@@ -76,6 +92,10 @@ function App(): React.ReactElement {
                 <BreathingAnimation
                     ref={breathingAnimationRef}
                     gradientColor={breathingAnimationGradientColor}
+                    inDuration={inDuration}
+                    holdInDuration={holdInDuration}
+                    outDuration={outDuration}
+                    holdOutDuration={holdOutDuration}
                 />
                 <PanelTransitionButton
                     label={"SETTINGS"}
@@ -110,10 +130,10 @@ function App(): React.ReactElement {
                             },
                             input: {
                                 type: "text",
-                                placeholder: "4.0",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
                                 handleInput: (value) => {
                                     resetBreathingAnimation();
-                                    console.log(`typed ${value}`);
+                                    setInDuration(parseFloat(value));
                                 },
                             },
                             note: {},
@@ -124,10 +144,10 @@ function App(): React.ReactElement {
                             },
                             input: {
                                 type: "text",
-                                placeholder: "4.0",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
                                 handleInput: (value) => {
                                     resetBreathingAnimation();
-                                    console.log(`typed ${value}`);
+                                    setHoldInDuration(parseFloat(value));
                                 },
                             },
                             note: { text: "note2" },
@@ -138,10 +158,10 @@ function App(): React.ReactElement {
                             },
                             input: {
                                 type: "text",
-                                placeholder: "4.0",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
                                 handleInput: (value) => {
                                     resetBreathingAnimation();
-                                    console.log(`typed ${value}`);
+                                    setOutDuration(parseFloat(value));
                                 },
                             },
                             note: {},
@@ -152,10 +172,10 @@ function App(): React.ReactElement {
                             },
                             input: {
                                 type: "text",
-                                placeholder: "4.0",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
                                 handleInput: (value) => {
                                     resetBreathingAnimation();
-                                    console.log(`typed ${value}`);
+                                    setHoldOutDuration(parseFloat(value));
                                 },
                             },
                             note: {},
@@ -164,10 +184,10 @@ function App(): React.ReactElement {
                             description: { text: "Colour" },
                             input: {
                                 type: "text",
-                                placeholder: "#0096ffcc",
+                                placeholder: DEFAULT_COLOUR,
                                 handleInput: (value) => {
                                     resetBreathingAnimation();
-                                    console.log(`typed ${value}`);
+                                    setBreathingAnimationGradientColor(value);
                                 },
                             },
                             note: {},
@@ -179,7 +199,7 @@ function App(): React.ReactElement {
                                 placeholder: "no",
                                 handleInput: (value) => {
                                     resetBreathingAnimation();
-                                    console.log(`typed ${value}`);
+                                    // show timer
                                 },
                             },
                             note: {},
