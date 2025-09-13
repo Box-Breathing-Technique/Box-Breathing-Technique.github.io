@@ -1,7 +1,19 @@
 .SettingNote {
     grid-column: 3;
+    color: var(--tertiary-color);
+    text-align: left;
+    justify-self: left;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 5;
+    gap: 5px;
 }
 
-.SettingNote.hidden {
-    visibility: hidden;
+.text {
+    font-size: small;
+}
+
+.icon {
+    font-size: large;
+    align-self: center;
 }

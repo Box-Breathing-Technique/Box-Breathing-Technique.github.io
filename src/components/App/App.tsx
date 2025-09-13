@@ -16,6 +16,9 @@ import Settings from "../Settings";
 
 const DEFAULT_COLOUR: string = "#0096ffcc";
 const DEFAULT_BREATH_DURATION: number = 4.0;
+const BREATHING_NOTE: string =
+    "The recommended duration is 4 seconds, but can be customised to match your breathing rhythm.";
+const COLOUR_NOTE: string = "Must be a valid CSS color value";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -136,7 +139,7 @@ function App(): React.ReactElement {
                                     setInDuration(parseFloat(value));
                                 },
                             },
-                            note: {},
+                            note: { text: BREATHING_NOTE },
                         },
                         {
                             description: {
@@ -150,7 +153,7 @@ function App(): React.ReactElement {
                                     setHoldInDuration(parseFloat(value));
                                 },
                             },
-                            note: { text: "note2" },
+                            note: { text: BREATHING_NOTE },
                         },
                         {
                             description: {
@@ -164,7 +167,7 @@ function App(): React.ReactElement {
                                     setOutDuration(parseFloat(value));
                                 },
                             },
-                            note: {},
+                            note: { text: BREATHING_NOTE },
                         },
                         {
                             description: {
@@ -178,7 +181,7 @@ function App(): React.ReactElement {
                                     setHoldOutDuration(parseFloat(value));
                                 },
                             },
-                            note: {},
+                            note: { text: BREATHING_NOTE },
                         },
                         {
                             description: { text: "Colour" },
@@ -190,7 +193,7 @@ function App(): React.ReactElement {
                                     setBreathingAnimationGradientColor(value);
                                 },
                             },
-                            note: {},
+                            note: { text: COLOUR_NOTE },
                         },
                         {
                             description: { text: "Show Timer" },
@@ -202,7 +205,6 @@ function App(): React.ReactElement {
                                     // show timer
                                 },
                             },
-                            note: {},
                         },
                     ]}
                 />

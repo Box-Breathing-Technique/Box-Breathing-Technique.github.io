@@ -14,14 +14,16 @@ export const testId: string = "setting-note";
  * @returns {React.ReactElement}
  */
 function SettingNote({ text }: SettingNoteProps): React.ReactElement {
-    const hidden: boolean = text ? false : true;
-    return (
+    return text ? (
         <div
-            className={`SettingNote ${hidden ? "hidden" : ""}`}
+            className={"SettingNote"}
             data-testid="setting-note"
         >
-            {text}
+            <div className="material-icons-outlined icon">info</div>
+            <div className="text">{text}</div>
         </div>
+    ) : (
+        <></>
     );
 }
 

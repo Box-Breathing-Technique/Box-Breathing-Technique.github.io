@@ -24,5 +24,5 @@ export interface SettingNoteProps {
 export interface SettingsItem {
     description: SettingDescriptionProps;
     input: SettingInputProps;
-    note: SettingNoteProps;
+    note?: SettingNoteProps;
 }
