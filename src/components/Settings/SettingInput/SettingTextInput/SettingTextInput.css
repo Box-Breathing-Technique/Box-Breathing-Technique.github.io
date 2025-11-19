@@ -4,6 +4,6 @@
     border-color: var(--secondary-color);
     border-radius: 2px;
     text-align: center;
-    height: 25px;
+    height: var(--input-size);
     width: 10ch;
 }

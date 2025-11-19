@@ -8,6 +8,7 @@ import React, { useRef } from "react";
 import "./SettingInput.css";
 import { SettingInputProps } from "../Settings.types";
 import SettingTextInput from "./SettingTextInput";
+import SettingCheckboxInput from "./SettingCheckboxInput";
 
 export const testId: string = "setting-input";
 
@@ -40,6 +41,10 @@ function SettingInput({
                                 setError={setError}
                                 errorMessage={errorMessage}
                             />
+                        );
+                    case "checkbox":
+                        return (
+                            <SettingCheckboxInput handleInput={handleInput} />
                         );
                 }
             })()}

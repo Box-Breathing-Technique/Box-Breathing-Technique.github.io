@@ -6,7 +6,7 @@
 
 import { FontInfo } from "../../types";
 
-export type SettingInputType = "text";
+export type SettingInputType = "text" | "checkbox";
 
 export interface SettingDescriptionProps {
     text: string;
@@ -15,7 +15,7 @@ export interface SettingDescriptionProps {
 export interface SettingInputProps {
     type: SettingInputType;
     placeholder?: string;
-    handleInput: (value: string) => void;
+    handleInput: (value: string | boolean) => void;
     validateInput?: (input: string) => boolean;
     setError?: React.Dispatch<React.SetStateAction<string | undefined>>;
     errorMessage?: string;

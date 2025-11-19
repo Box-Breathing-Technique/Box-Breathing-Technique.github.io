@@ -11,7 +11,7 @@ export const testId: string = "setting-text-input";
 
 const submitDelay: number = 1000;
 
-interface SettingInputTextProps {
+interface SettingTextInputProps {
     placeholder: string;
     handleInput: (value: string) => void;
     validateInput?: (input: string) => boolean;
@@ -28,7 +28,7 @@ function SettingTextInput({
     validateInput,
     setError,
     errorMessage,
-}: SettingInputTextProps): React.ReactElement {
+}: SettingTextInputProps): React.ReactElement {
     const [value, setValue] = useState<string>("");
     const timeoutRef = useRef<NodeJS.Timeout>(undefined);
     return (

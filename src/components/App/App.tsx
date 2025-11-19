@@ -111,7 +111,7 @@ function App(): React.ReactElement {
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     breathingAnimationRef.current?.setInDuration(
-                                        parseFloat(value),
+                                        parseFloat(value as string),
                                     );
                                 },
                                 validateInput: validateBreathingInput,
@@ -129,7 +129,7 @@ function App(): React.ReactElement {
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     breathingAnimationRef.current?.setHoldInDuration(
-                                        parseFloat(value),
+                                        parseFloat(value as string),
                                     );
                                 },
                                 validateInput: validateBreathingInput,
@@ -147,7 +147,7 @@ function App(): React.ReactElement {
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     breathingAnimationRef.current?.setOutDuration(
-                                        parseFloat(value),
+                                        parseFloat(value as string),
                                     );
                                 },
                                 validateInput: validateBreathingInput,
@@ -165,7 +165,7 @@ function App(): React.ReactElement {
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     breathingAnimationRef.current?.setHoldOutDuration(
-                                        parseFloat(value),
+                                        parseFloat(value as string),
                                     );
                                 },
                                 validateInput: validateBreathingInput,
@@ -181,7 +181,7 @@ function App(): React.ReactElement {
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     breathingAnimationRef.current?.setGradientColor(
-                                        value,
+                                        value as string,
                                     );
                                 },
                                 validateInput(input) {
@@ -194,11 +194,13 @@ function App(): React.ReactElement {
                         {
                             description: { text: "Show Timer" },
                             input: {
-                                type: "text",
-                                placeholder: "no",
+                                type: "checkbox",
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     // show timer
+                                    console.log(
+                                        `${value ? "showing" : "hiding"} timer`,
+                                    );
                                 },
                             },
                         },
