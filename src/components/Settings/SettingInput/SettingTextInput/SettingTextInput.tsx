@@ -4,7 +4,7 @@
  * @author Joshua Linehan
  */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./SettingTextInput.css";
 
 export const testId: string = "setting-text-input";
@@ -15,6 +15,8 @@ interface SettingInputTextProps {
     placeholder: string;
     handleInput: (value: string) => void;
     validateInput?: (input: string) => boolean;
+    setError?: React.Dispatch<React.SetStateAction<string | undefined>>;
+    errorMessage?: string;
 }
 
 /**
@@ -24,23 +26,30 @@ function SettingTextInput({
     placeholder,
     handleInput,
     validateInput,
+    setError,
+    errorMessage,
 }: SettingInputTextProps): React.ReactElement {
-    const inputRef = useRef<HTMLInputElement>(null);
-    let timeout: NodeJS.Timeout;
+    const [value, setValue] = useState<string>("");
+    const timeoutRef = useRef<NodeJS.Timeout>(undefined);
     return (
         <input
             className="SettingTextInput"
             data-testid="setting-text-input"
             type="text"
             placeholder={placeholder}
-            ref={inputRef}
+            value={value}
             onChange={(e) => {
-                clearTimeout(timeout);
-                const value: string = e.target.value;
-                if (value) {
-                    timeout = setTimeout(() => {
-                        if ((validateInput ?? (() => true))(value))
-                            handleInput(value);
+                setError?.(undefined);
+                clearTimeout(timeoutRef.current);
+                const newValue: string = e.target.value;
+                setValue(newValue);
+                if (newValue) {
+                    timeoutRef.current = setTimeout(() => {
+                        if ((validateInput ?? (() => true))(newValue)) {
+                            handleInput(newValue);
+                        } else {
+                            setError?.(errorMessage ?? "Invalid input");
+                        }
                     }, submitDelay);
                 }
             }}

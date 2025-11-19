@@ -4,12 +4,17 @@
  * @author Joshua Linehan
  */
 
-import React, { ReactElement, useRef } from "react";
+import React, { useState } from "react";
 import "./Settings.css";
-import { SettingsItem } from "./Settings.types";
+import {
+    SettingDescriptionProps,
+    SettingInputProps,
+    SettingNoteProps,
+    SettingsItem,
+} from "./Settings.types";
 import SettingDescription from "./SettingDescription";
-import SettingNote from "./SettingNote";
 import SettingInput from "./SettingInput";
+import SettingNote from "./SettingNote";
 
 export const testId: string = "settings";
 
@@ -17,63 +22,63 @@ interface SettingsProps {
     settingsItems: SettingsItem[];
 }
 
+interface ElementRowProps {
+    settingsItem: SettingsItem;
+    index: number;
+}
+
 /**
  * @returns {React.ReactElement}
  */
 function Settings({ settingsItems }: SettingsProps): React.ReactElement {
-    // build element lists
-    const descriptions: ReactElement[] = [];
-    const inputs: ReactElement[] = [];
-    const notes: ReactElement[] = [];
+    // generate elements
+    const elements: React.ReactElement[] = [];
+    const ElementRow: (props: ElementRowProps) => React.ReactElement = ({
+        settingsItem,
+        index,
+    }) => {
+        const [error, setError] = useState<string | undefined>(undefined);
+        return (
+            <>
+                <SettingDescription
+                    key={`desc-${index}`}
+                    {...(settingsItem.description as SettingDescriptionProps)}
+                />
+
+                <SettingInput
+                    key={`input-${index}`}
+                    {...({
+                        ...settingsItem.input,
+                        ...{ setError: setError },
+                    } as SettingInputProps)}
+                />
+
+                <SettingNote
+                    key={`note-${index}`}
+                    {...({
+                        ...settingsItem.note,
+                        ...{ error: error },
+                    } as SettingNoteProps)}
+                />
+            </>
+        );
+    };
     settingsItems.forEach((value, index) => {
-        descriptions.push(
-            <SettingDescription
-                key={`desc-${index}`}
-                {...value.description}
-            />,
-        );
-        inputs.push(
-            <SettingInput
-                key={`input-${index}`}
-                {...value.input}
-            />,
-        );
-        notes.push(
-            <SettingNote
-                key={`note-${index}`}
-                {...value.note}
+        elements.push(
+            <ElementRow
+                key={`row-${index}`}
+                settingsItem={value}
+                index={index}
             />,
         );
     });
-
-    // centre description and input columns
-    const settingsRef = useRef<HTMLDivElement | null>(null);
-    const alignmentRef = useRef<HTMLDivElement | null>(null);
-    const targetPosition =
-        (alignmentRef.current?.clientLeft ?? 0) +
-        (alignmentRef.current?.clientWidth ?? 0) / 2;
-    const actualPosition =
-        (settingsRef.current?.clientLeft ?? 0) +
-        (settingsRef.current?.clientWidth ?? 0) / 2;
-    const offset = actualPosition - targetPosition;
-    const settingsStyle: React.CSSProperties = {
-        transform: `translate(-50%, -50%) translateX(${offset}px)`,
-    };
 
     return (
         <div
             className="Settings"
             data-testid="settings"
-            style={settingsStyle}
-            ref={settingsRef}
         >
-            {descriptions}
-            {inputs}
-            {notes}
-            <div
-                className="AlignmentElement"
-                ref={alignmentRef}
-            />
+            {elements}
         </div>
     );
 }

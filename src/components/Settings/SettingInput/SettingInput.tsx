@@ -19,6 +19,8 @@ function SettingInput({
     placeholder,
     handleInput,
     validateInput,
+    setError,
+    errorMessage,
 }: SettingInputProps): React.ReactElement {
     const divRef = useRef<HTMLDivElement>(null);
     return (
@@ -35,6 +37,8 @@ function SettingInput({
                                 placeholder={placeholder!}
                                 handleInput={handleInput}
                                 validateInput={validateInput}
+                                setError={setError}
+                                errorMessage={errorMessage}
                             />
                         );
                 }

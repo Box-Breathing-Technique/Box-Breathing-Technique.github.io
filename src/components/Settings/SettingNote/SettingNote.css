@@ -1,19 +1,42 @@
 .SettingNote {
     grid-column: 3;
+    height: 100%;
+    width: 100%;
     color: var(--tertiary-color);
     text-align: left;
+    align-items: center;
     justify-self: left;
     display: flex;
     flex-direction: row;
-    flex-grow: 5;
     gap: 5px;
 }
 
 .text {
     font-size: small;
+    margin-bottom: 3px;
 }
 
 .icon {
     font-size: large;
     align-self: center;
+}
+
+.error {
+    position: absolute;
+    color: red;
+    background-color: black;
+    text-align: left;
+    align-items: center;
+    justify-items: left;
+    justify-content: left;
+    justify-self: left;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    transition: all 0.3s;
+    transform: rotateX(0deg);
+}
+
+.error.hidden {
+    opacity: 0;
 }

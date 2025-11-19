@@ -4,6 +4,8 @@
  * @author Joshua Linehan
  */
 
+import { FontInfo } from "../../types";
+
 export type SettingInputType = "text";
 
 export interface SettingDescriptionProps {
@@ -15,14 +17,27 @@ export interface SettingInputProps {
     placeholder?: string;
     handleInput: (value: string) => void;
     validateInput?: (input: string) => boolean;
+    setError?: React.Dispatch<React.SetStateAction<string | undefined>>;
+    errorMessage?: string;
 }
 
 export interface SettingNoteProps {
     text?: string;
+    error?: string;
 }
 
 export interface SettingsItem {
-    description: SettingDescriptionProps;
-    input: SettingInputProps;
-    note?: SettingNoteProps;
+    description: Partial<SettingDescriptionProps>;
+    input: Partial<SettingInputProps>;
+    note?: Partial<SettingNoteProps>;
+}
+
+export interface SettingsContext {
+    setInDuration?: (value: number) => void;
+    setHoldInDuration?: (value: number) => void;
+    setOutDuration?: (value: number) => void;
+    setHoldOutDuration?: (value: number) => void;
+    setGradientColor?: (value: string) => void;
+    reset?: () => void;
+    fontInfo?: FontInfo;
 }
