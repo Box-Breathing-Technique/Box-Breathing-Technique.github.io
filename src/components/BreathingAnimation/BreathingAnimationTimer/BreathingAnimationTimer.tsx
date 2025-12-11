@@ -45,7 +45,6 @@ function BreathingAnimationTimer(
     };
 
     const reset: () => void = () => {
-        console.log("resetting");
         setActive(false);
         setTimerText(START_TEXT);
     };
@@ -57,8 +56,6 @@ function BreathingAnimationTimer(
                 setTimerText(
                     `${`${Math.floor(duration / MS_IN_HR)}`.padStart(2, "0")}:${`${Math.floor(duration / MS_IN_MIN) % MIN_IN_HR}`.padStart(2, "0")}:${`${Math.floor(duration / MS_IN_SEC) % SEC_IN_MIN}`.padStart(2, "0")}`,
                 );
-            } else {
-                console.log("inactive");
             }
         }, 1 * MS_IN_SEC);
         // Cleanup function
