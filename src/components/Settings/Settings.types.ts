@@ -4,7 +4,9 @@
  * @author Joshua Linehan
  */
 
-export type SettingInputType = "text";
+import { FontInfo } from "../../types";
+
+export type SettingInputType = "text" | "checkbox";
 
 export interface SettingDescriptionProps {
     text: string;
@@ -12,15 +14,32 @@ export interface SettingDescriptionProps {
 
 export interface SettingInputProps {
     type: SettingInputType;
+    placeholder?: string;
+    handleInput: (value: string | boolean) => void;
+    validateInput?: (input: string) => boolean;
+    setError?: React.Dispatch<React.SetStateAction<string | undefined>>;
+    errorMessage?: string;
+    value?: () => string | boolean;
 }
 
 export interface SettingNoteProps {
     text?: string;
-    hidden?: boolean;
+    error?: string;
 }
 
 export interface SettingsItem {
-    description: SettingDescriptionProps;
-    input: SettingInputProps;
-    note?: SettingNoteProps;
+    description: Partial<SettingDescriptionProps>;
+    input: Partial<SettingInputProps>;
+    note?: Partial<SettingNoteProps>;
+    value?: () => string | boolean;
+}
+
+export interface SettingsContext {
+    setInDuration?: (value: number) => void;
+    setHoldInDuration?: (value: number) => void;
+    setOutDuration?: (value: number) => void;
+    setHoldOutDuration?: (value: number) => void;
+    setGradientColor?: (value: string) => void;
+    reset?: () => void;
+    fontInfo?: FontInfo;
 }

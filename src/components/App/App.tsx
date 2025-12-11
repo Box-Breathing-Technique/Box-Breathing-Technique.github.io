@@ -13,7 +13,16 @@ import { BreathingAnimationRef } from "../BreathingAnimation/BreathingAnimation.
 import PanelTransitionButton from "../PanelTransitionButton";
 import { useTextStyle } from "../../hooks";
 import Settings from "../Settings";
+
 import About from "../About";
+import parseCSSColor from "parse-css-color";
+import { DEFAULT_BREATH_DURATION, DEFAULT_COLOUR } from "../../utils";
+
+const BREATHING_NOTE: string =
+    "The recommended duration is 4 seconds, but can be customised to match your breathing rhythm.";
+const COLOUR_NOTE: string = "Must be a valid CSS color value";
+const BREATHING_ERROR: string = "Must be a number";
+const COLOUR_ERROR: string = "Must be a valid CSS color value";
 
 /** Master component for web app
  * @returns {React.ReactElement}
@@ -32,14 +41,6 @@ import About from "../About";
 function App(): React.ReactElement {
     const [appState, setAppState] = useState<AppState>("animation");
     const breathingAnimationRef = useRef<BreathingAnimationRef>(null);
-    const [
-        breathingAnimationGradientColor,
-        setBreathingAnimationGradientColor,
-    ] = useState<string>("#0096ffcc");
-
-    const resetBreathingAnimation: () => void = () => {
-        breathingAnimationRef.current?.reset();
-    };
 
     const fontInfo = useTextStyle(
         useCallback(
@@ -94,10 +95,7 @@ function App(): React.ReactElement {
                     onClick={() => setAppState("about")}
                     fontInfo={fontInfo}
                 />
-                <BreathingAnimation
-                    ref={breathingAnimationRef}
-                    gradientColor={breathingAnimationGradientColor}
-                />
+                <BreathingAnimation ref={breathingAnimationRef} />
                 <PanelTransitionButton
                     label={"SETTINGS"}
                     onClick={() => setAppState("settings")}
@@ -126,19 +124,123 @@ function App(): React.ReactElement {
                 <Settings
                     settingsItems={[
                         {
-                            description: { text: "desc1" },
-                            input: { type: "text" },
+                            description: {
+                                text: "Breathe In Duration (seconds)",
+                            },
+                            input: {
+                                type: "text",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
+                                handleInput(value) {
+                                    breathingAnimationRef.current?.reset();
+                                    breathingAnimationRef.current?.setInDuration(
+                                        parseFloat(value as string),
+                                    );
+                                },
+                                validateInput: validateBreathingInput,
+                                errorMessage: BREATHING_ERROR,
+                            },
+                            note: { text: BREATHING_NOTE },
                         },
                         {
-                            description: { text: "desc2" },
-                            input: { type: "text" },
-                            note: { text: "note2" },
+                            description: {
+                                text: "Hold Breath In Duration (seconds)",
+                            },
+                            input: {
+                                type: "text",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
+                                handleInput(value) {
+                                    breathingAnimationRef.current?.reset();
+                                    breathingAnimationRef.current?.setHoldInDuration(
+                                        parseFloat(value as string),
+                                    );
+                                },
+                                validateInput: validateBreathingInput,
+                                errorMessage: BREATHING_ERROR,
+                            },
+                            note: { text: BREATHING_NOTE },
+                        },
+                        {
+                            description: {
+                                text: "Breathe Out Duration (seconds)",
+                            },
+                            input: {
+                                type: "text",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
+                                handleInput(value) {
+                                    breathingAnimationRef.current?.reset();
+                                    breathingAnimationRef.current?.setOutDuration(
+                                        parseFloat(value as string),
+                                    );
+                                },
+                                validateInput: validateBreathingInput,
+                                errorMessage: BREATHING_ERROR,
+                            },
+                            note: { text: BREATHING_NOTE },
+                        },
+                        {
+                            description: {
+                                text: "Hold Breath Out Duration (seconds)",
+                            },
+                            input: {
+                                type: "text",
+                                placeholder: `${DEFAULT_BREATH_DURATION}`,
+                                handleInput(value) {
+                                    breathingAnimationRef.current?.reset();
+                                    breathingAnimationRef.current?.setHoldOutDuration(
+                                        parseFloat(value as string),
+                                    );
+                                },
+                                validateInput: validateBreathingInput,
+                                errorMessage: BREATHING_ERROR,
+                            },
+                            note: { text: BREATHING_NOTE },
+                        },
+                        {
+                            description: { text: "Colour" },
+                            input: {
+                                type: "text",
+                                placeholder: DEFAULT_COLOUR,
+                                handleInput(value) {
+                                    breathingAnimationRef.current?.reset();
+                                    breathingAnimationRef.current?.setGradientColor(
+                                        value as string,
+                                    );
+                                },
+                                validateInput(input) {
+                                    return parseCSSColor(input) ? true : false;
+                                },
+                                errorMessage: COLOUR_ERROR,
+                            },
+                            note: { text: COLOUR_NOTE },
+                        },
+                        {
+                            description: { text: "Show Timer" },
+                            input: {
+                                type: "checkbox",
+                                handleInput(value) {
+                                    breathingAnimationRef.current?.reset();
+                                    // show timer
+                                    breathingAnimationRef.current?.setTimerHidden(
+                                        !(value as boolean),
+                                    );
+                                },
+                                value() {
+                                    return !(
+                                        breathingAnimationRef.current?.getTimerHidden() ??
+                                        true
+                                    );
+                                },
+                            },
                         },
                     ]}
                 />
             </Panel>
         </div>
     );
+}
+
+function validateBreathingInput(input: string): boolean {
+    return parseFloat(input).toString() === input;
 }
 
 export default App;

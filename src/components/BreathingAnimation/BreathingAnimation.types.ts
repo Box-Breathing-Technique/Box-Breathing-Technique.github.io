@@ -13,4 +13,16 @@ export const NUM_PHASES: number = 4;
 export interface BreathingAnimationRef {
     reset: () => void;
     textContainerRef: RefObject<HTMLElement | null>;
+    setInDuration: React.Dispatch<React.SetStateAction<number>>;
+    setHoldInDuration: React.Dispatch<React.SetStateAction<number>>;
+    setOutDuration: React.Dispatch<React.SetStateAction<number>>;
+    setHoldOutDuration: React.Dispatch<React.SetStateAction<number>>;
+    setGradientColor: React.Dispatch<React.SetStateAction<string>>;
+    setTimerHidden: React.Dispatch<React.SetStateAction<boolean>>;
+    getTimerHidden: () => boolean;
+}
+
+export interface BreathingAnimationTimerRef {
+    start: () => void;
+    reset: () => void;
 }

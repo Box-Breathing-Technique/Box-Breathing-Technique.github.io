@@ -1,0 +1,9 @@
+.SettingTextInput {
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    border-radius: 2px;
+    text-align: center;
+    height: var(--input-size);
+    width: 10ch;
+}
