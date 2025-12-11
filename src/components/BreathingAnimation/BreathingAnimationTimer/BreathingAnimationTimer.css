@@ -1,5 +1,5 @@
 .BreathingAnimationTimer {
-    transform: translateY(calc(min(125px, 25vmin) + 50px));
+    transform: translateY(min(175px, 35vmin));
     opacity: 1;
 }
 
