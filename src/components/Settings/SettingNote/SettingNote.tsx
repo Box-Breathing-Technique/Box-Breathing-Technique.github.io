@@ -10,7 +10,10 @@ import { SettingNoteProps } from "../Settings.types";
 
 export const testId: string = "setting-note";
 
-/**
+/** Additional information about a settings item, can display errors
+ *
+ * @property {string | undefined} text Text displayed in normal circumstances
+ * @property {string | undefined} error Text displayed when there is an error
  * @returns {React.ReactElement}
  */
 function SettingNote({ text, error }: SettingNoteProps): React.ReactElement {

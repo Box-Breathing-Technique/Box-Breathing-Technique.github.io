@@ -9,7 +9,8 @@ import "./About.css";
 
 export const testId: string = "about";
 
-/**
+/** Content for the about panel
+ *
  * @returns {React.ReactElement}
  */
 function About(): React.ReactElement {

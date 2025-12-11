@@ -25,10 +25,7 @@ interface BreathingAnimationTextProps {
  * @returns {React.ReactElement}
  *
  * @example
- * // Breathe in (first phase)
  * const [phase, setPhase] = useState<Phase>(START_PHASE);
- * // implement phase rotation system
- * setPhase(0);
  * <BreathingAnimationText
  *     text={"BREATHE IN"}
  *     activePhase={0}

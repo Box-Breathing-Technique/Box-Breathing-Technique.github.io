@@ -27,8 +27,35 @@ interface ElementRowProps {
     index: number;
 }
 
-/**
+/** Content for the settings panel
+ *
+ * @property {SettingsItem[]} settingsItems a list of settings items to be displayed in the settings panel
  * @returns {React.ReactElement}
+ *
+ * @example
+ * // a Settings component with a text input and a checkbox
+ * <Settings
+ *      settingsItems={[
+ *          {
+ *              description: { text: "Text Input" },
+ *              input: {
+ *                  type: "text",
+ *                  handleInput(value) {
+ *                      // handle text input
+ *                  },
+ *              },
+ *              {
+ *          },
+ *              description: { text: "Checkbox Input" },
+ *              input: {
+ *                  type: "checkbox",
+ *                  handleInput(value) {
+ *                      // handle checkbox input
+ *                  },
+ *              },
+ *          },
+ *      ]}
+ *  />
  */
 function Settings({ settingsItems }: SettingsProps): React.ReactElement {
     // generate elements

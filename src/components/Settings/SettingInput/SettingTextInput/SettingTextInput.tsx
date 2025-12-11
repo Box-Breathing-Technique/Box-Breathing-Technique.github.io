@@ -20,6 +20,17 @@ interface SettingTextInputProps {
 }
 
 /**
+ *
+ * @property {string} placeholder the placeholder text before input is entered
+ * @property {(string) => void} handleInput function to handle input to this
+ * component
+ * @property {((string) => boolean) | undefined} [validateInput] function to
+ * flag improper input
+ * @property {React.Dispatch<React.SetStateAction<string | undefined>> | undefined} [setError]
+ * function to set error message on failing validateInput. Should be from
+ * setState
+ * @property {string | undefined} [errorMessage] Message to be displayed on
+ * failure of validateInput
  * @returns {React.ReactElement}
  */
 function SettingTextInput({

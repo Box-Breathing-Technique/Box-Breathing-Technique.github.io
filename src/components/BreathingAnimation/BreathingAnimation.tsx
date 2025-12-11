@@ -38,6 +38,11 @@ export const startDelay: number = 1.5;
  * @example
  * // Default settings
  * <BreathingAnimation />
+ *
+ * @example
+ * // With ref
+ * ref = useRef<BreathingAnimationRef>(null);
+ * <BreathingAnimation ref={ref} />
  */
 function BreathingAnimation(
     _props: {},

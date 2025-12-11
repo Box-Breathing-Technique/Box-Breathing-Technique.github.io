@@ -14,7 +14,11 @@ interface SettingCheckboxInputProps {
     value: () => boolean;
 }
 
-/**
+/** Toggleable boolean input
+ *
+ * @property {(boolean) => void} handleInput function to handle checkbox
+ * value
+ * @property {() => boolean} value getter function for setting value
  * @returns {React.ReactElement}
  */
 function SettingCheckboxInput({

@@ -28,8 +28,18 @@ interface BreathingAnimationTimerProps {
     hidden: boolean;
 }
 
-/**
+/** Displays the duration since staring the animation
+ * @property {boolean} hidden Whether the timer is set to show. Should be set
+ * using setState
+ * @param {BreathingAnimationTimerRef} ref allows access to start and reset
+ * functions
  * @returns {React.ReactElement}
+ *
+ * @example
+ * <BreathingAnimationTimer
+ *      hidden={hidden}
+ *      ref={timerRef}
+ * />
  */
 function BreathingAnimationTimer(
     { hidden }: BreathingAnimationTimerProps,
