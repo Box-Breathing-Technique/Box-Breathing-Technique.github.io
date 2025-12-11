@@ -7,7 +7,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import BreathingAnimationText, { testId } from "./BreathingAnimationText";
-import { Phase, START_PHASE } from "../Phases";
+import { Phase, START_PHASE } from "../BreathingAnimation.types";
 
 type Subclass = "before" | "active" | "after";
 const before: Subclass = "before";

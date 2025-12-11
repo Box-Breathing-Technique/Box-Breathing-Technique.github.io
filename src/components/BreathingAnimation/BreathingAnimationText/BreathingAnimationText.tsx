@@ -6,7 +6,7 @@
 
 import React from "react";
 import "./BreathingAnimationText.css";
-import { Phase, NUM_PHASES, START_PHASE } from "../Phases";
+import { Phase, NUM_PHASES, START_PHASE } from "../BreathingAnimation.types";
 
 export const testId: string = "breathing-animation-text";
 

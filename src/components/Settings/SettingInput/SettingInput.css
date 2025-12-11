@@ -1,0 +1,4 @@
+.SettingInput {
+    --input-size: 25px;
+    grid-column: 2;
+}

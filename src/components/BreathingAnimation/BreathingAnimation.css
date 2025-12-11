@@ -9,11 +9,14 @@
 .BreathingAnimationContainer {
     --max-size: 250px;
     container-type: inline-size;
-    container-name: breathing-animation;
     width: 50vmin;
     height: 50vmin;
     max-width: var(--max-size);
     max-height: var(--max-size);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
 }
 .BreathingAnimationBox {
     position: relative;
@@ -27,6 +30,7 @@
 
 .BreathingAnimationTextContainer {
     font-size: 15cqw;
+    text-align: center;
     letter-spacing: 2cqw;
     position: relative;
     top: 50%;

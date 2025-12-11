@@ -1,0 +1,22 @@
+.Panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+    transition-duration: 1s;
+}
+
+.Panel.above {
+    visibility: hidden;
+    transform: translateY(-100%);
+}
+
+.Panel.below {
+    visibility: hidden;
+    transform: translateY(100%);
+}
