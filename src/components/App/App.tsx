@@ -198,8 +198,14 @@ function App(): React.ReactElement {
                                 handleInput(value) {
                                     breathingAnimationRef.current?.reset();
                                     // show timer
-                                    console.log(
-                                        `${value ? "showing" : "hiding"} timer`,
+                                    breathingAnimationRef.current?.setTimerHidden(
+                                        !(value as boolean),
+                                    );
+                                },
+                                value() {
+                                    return !(
+                                        breathingAnimationRef.current?.getTimerHidden() ??
+                                        true
                                     );
                                 },
                             },

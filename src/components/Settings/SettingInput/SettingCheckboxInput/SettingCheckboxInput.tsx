@@ -4,13 +4,14 @@
  * @author Joshua Linehan
  */
 
-import React from "react";
+import React, { useState } from "react";
 import "./SettingCheckboxInput.css";
 
 export const testId: string = "setting-checkbox-input";
 
 interface SettingCheckboxInputProps {
     handleInput: (value: boolean) => void;
+    value: () => boolean;
 }
 
 /**
@@ -18,14 +19,19 @@ interface SettingCheckboxInputProps {
  */
 function SettingCheckboxInput({
     handleInput,
+    value,
 }: SettingCheckboxInputProps): React.ReactElement {
+    const [checked, setChecked] = useState<boolean>(value());
     return (
         <input
             className="SettingCheckboxInput"
             data-testid="setting-checkbox-input"
             type="checkbox"
+            checked={checked}
             onChange={(e) => {
-                handleInput(e.target.checked);
+                const newValue: boolean = e.target.checked;
+                setChecked(newValue);
+                handleInput(newValue);
             }}
         ></input>
     );

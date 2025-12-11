@@ -16,6 +16,7 @@ import "./BreathingAnimation.css";
 import BreathingAnimationText from "./BreathingAnimationText";
 import {
     BreathingAnimationRef,
+    BreathingAnimationTimerRef,
     NUM_PHASES,
     Phase,
     START_PHASE,
@@ -23,6 +24,7 @@ import {
 import BreathingAnimationStart from "./BreathingAnimationStart";
 import { MS_IN_SEC } from "../../constants";
 import { DEFAULT_BREATH_DURATION, DEFAULT_COLOUR } from "../../utils";
+import BreathingAnimationTimer from "./BreathingAnimationTimer";
 
 export const startDelay: number = 1.5;
 
@@ -41,6 +43,7 @@ function BreathingAnimation(
     _props: {},
     ref: React.Ref<BreathingAnimationRef>,
 ): React.ReactElement {
+    const timerRef = useRef<BreathingAnimationTimerRef>(null);
     // set phase cycle
     const [phase, setPhase] = useState<Phase>(START_PHASE); /* starting with an
     "invalid" value allows elements to start in default positions without a CSS
@@ -61,6 +64,10 @@ function BreathingAnimation(
         DEFAULT_BREATH_DURATION,
     );
     const [gradientColor, setGradientColor] = useState<string>(DEFAULT_COLOUR);
+
+    // handle timer functions
+    const [timerHidden, setTimerHidden] = useState<boolean>(true);
+    const getTimerHidden: () => boolean = () => timerHidden;
 
     useEffect(() => {
         if (!active) {
@@ -109,6 +116,8 @@ function BreathingAnimation(
         setStartTriggered(false);
         setActive(false);
         setPhase(START_PHASE);
+        // reset timer
+        timerRef.current?.reset();
     };
 
     // generate ref
@@ -121,6 +130,8 @@ function BreathingAnimation(
         setOutDuration,
         setHoldOutDuration,
         setGradientColor,
+        setTimerHidden,
+        getTimerHidden,
     }));
 
     // set phase transition style
@@ -194,10 +205,15 @@ function BreathingAnimation(
                             setStartTriggered(true);
                             activeTimeoutRef.current = setTimeout(() => {
                                 setActive(true);
+                                timerRef.current?.start();
                             }, startDelay * MS_IN_SEC);
                         }}
                         startTriggered={startTriggered}
                         startDelay={startDelay}
+                    />
+                    <BreathingAnimationTimer
+                        ref={timerRef}
+                        hidden={timerHidden}
                     />
                 </div>
                 <div

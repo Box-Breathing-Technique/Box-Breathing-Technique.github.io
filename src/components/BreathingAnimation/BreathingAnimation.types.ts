@@ -18,4 +18,11 @@ export interface BreathingAnimationRef {
     setOutDuration: React.Dispatch<React.SetStateAction<number>>;
     setHoldOutDuration: React.Dispatch<React.SetStateAction<number>>;
     setGradientColor: React.Dispatch<React.SetStateAction<string>>;
+    setTimerHidden: React.Dispatch<React.SetStateAction<boolean>>;
+    getTimerHidden: () => boolean;
+}
+
+export interface BreathingAnimationTimerRef {
+    start: () => void;
+    reset: () => void;
 }

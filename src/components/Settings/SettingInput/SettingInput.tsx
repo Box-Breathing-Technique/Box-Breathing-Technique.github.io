@@ -22,6 +22,7 @@ function SettingInput({
     validateInput,
     setError,
     errorMessage,
+    value,
 }: SettingInputProps): React.ReactElement {
     const divRef = useRef<HTMLDivElement>(null);
     return (
@@ -44,7 +45,10 @@ function SettingInput({
                         );
                     case "checkbox":
                         return (
-                            <SettingCheckboxInput handleInput={handleInput} />
+                            <SettingCheckboxInput
+                                handleInput={handleInput}
+                                value={value! as () => boolean}
+                            />
                         );
                 }
             })()}

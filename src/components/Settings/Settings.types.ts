@@ -19,6 +19,7 @@ export interface SettingInputProps {
     validateInput?: (input: string) => boolean;
     setError?: React.Dispatch<React.SetStateAction<string | undefined>>;
     errorMessage?: string;
+    value?: () => string | boolean;
 }
 
 export interface SettingNoteProps {
@@ -30,6 +31,7 @@ export interface SettingsItem {
     description: Partial<SettingDescriptionProps>;
     input: Partial<SettingInputProps>;
     note?: Partial<SettingNoteProps>;
+    value?: () => string | boolean;
 }
 
 export interface SettingsContext {
