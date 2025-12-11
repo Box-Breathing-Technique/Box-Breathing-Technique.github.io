@@ -13,6 +13,8 @@ import { BreathingAnimationRef } from "../BreathingAnimation/BreathingAnimation.
 import PanelTransitionButton from "../PanelTransitionButton";
 import { useTextStyle } from "../../hooks";
 import Settings from "../Settings";
+
+import About from "../About";
 import parseCSSColor from "parse-css-color";
 import { DEFAULT_BREATH_DURATION, DEFAULT_COLOUR } from "../../utils";
 
@@ -54,6 +56,26 @@ function App(): React.ReactElement {
             data-testid="app"
         >
             {/* about panel */}
+            <Panel
+                stateFunction={(appState) => {
+                    switch (appState) {
+                        case "about":
+                            return "display";
+                        case "animation":
+                            return "above";
+                        case "settings":
+                            return "above";
+                    }
+                }}
+                state={appState}
+            >
+                <About />
+                <PanelTransitionButton
+                    label={"BACK"}
+                    onClick={() => setAppState("animation")}
+                    fontInfo={fontInfo}
+                />
+            </Panel>
             {/* animation panel */}
             <Panel
                 stateFunction={(appState) => {
@@ -70,7 +92,7 @@ function App(): React.ReactElement {
             >
                 <PanelTransitionButton
                     label={"ABOUT"}
-                    onClick={() => {}}
+                    onClick={() => setAppState("about")}
                     fontInfo={fontInfo}
                 />
                 <BreathingAnimation ref={breathingAnimationRef} />
