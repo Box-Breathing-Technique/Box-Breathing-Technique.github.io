@@ -1,0 +1,114 @@
+:root {
+    --in-duration: 4;
+    --hold-in-duration: 4;
+    --out-duration: 4;
+    --hold-out-duration: 4;
+    --transition-timing-function: ease-in-out;
+}
+
+.BreathingAnimationContainer {
+    --max-size: 250px;
+    container-type: inline-size;
+    width: 50vmin;
+    height: 50vmin;
+    max-width: var(--max-size);
+    max-height: var(--max-size);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+.BreathingAnimationBox {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    border-width: 1px;
+    box-sizing: border-box;
+}
+
+.BreathingAnimationTextContainer {
+    font-size: 15cqw;
+    text-align: center;
+    letter-spacing: 2cqw;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.BreathingAnimationDot {
+    --size: 10%;
+    --start-delay: 1.5;
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background-color: var(--primary-color);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--secondary-color);
+    border-radius: 50%;
+    top: 100%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    transition-duration: calc(var(--start-delay) * 1s);
+    transition-timing-function: linear;
+}
+
+.BreathingAnimationDot.phase0 {
+    top: 0%;
+    left: 0%;
+    transition-duration: calc(var(--in-duration) * 1s);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+.BreathingAnimationDot.phase1 {
+    top: 0%;
+    left: 100%;
+    transition-duration: calc(var(--hold-in-duration) * 1s);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+.BreathingAnimationDot.phase2 {
+    top: 100%;
+    left: 100%;
+    transition-duration: calc(var(--out-duration) * 1s);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+.BreathingAnimationDot.phase3 {
+    top: 100%;
+    left: 0%;
+    transition-duration: calc(var(--hold-out-duration) * 1s);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+.BreathingAnimationDot.hidden {
+    opacity: 0;
+    transition-duration: 0s;
+}
+
+.BreathingAnimationGradient {
+    --gradient-color: rgba(0, 150, 255, 0.8);
+    position: absolute;
+    bottom: 0;
+    background-image: linear-gradient(var(--gradient-color), rgba(0, 0, 0, 0));
+    box-sizing: border-box;
+    height: 0%;
+    width: 100%;
+    border-top: 1px solid var(--secondary-color);
+    transition-duration: 0s;
+}
+
+.BreathingAnimationGradient.in {
+    height: 100%;
+    transition-duration: calc(var(--in-duration) * 1s);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+.BreathingAnimationGradient.out {
+    height: 0%;
+    transition-duration: calc(var(--out-duration) * 1s);
+    transition-timing-function: var(--transition-timing-function);
+}

@@ -1,0 +1,8 @@
+.BreathingAnimationTimer {
+    transform: translateY(min(175px, 35vmin));
+    opacity: 1;
+}
+
+.BreathingAnimationTimer.hidden {
+    opacity: 0;
+}

@@ -7,10 +7,12 @@
         ]
     },
     "cSpell.words": [
+        "breathinganimation",
         "opsz",
         "TTFB",
         "webfonts",
         "wght"
     ],
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.eol": "\n"
 }

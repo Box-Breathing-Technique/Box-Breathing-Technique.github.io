@@ -1,0 +1,15 @@
+.About {
+    max-width: 900px;
+    text-align: center;
+    margin: auto;
+}
+
+.Footer {
+    display: grid;
+    grid-template-columns: 999fr 1fr 999fr;
+    gap: 20px;
+}
+
+a {
+    color: var(--secondary-color);
+}

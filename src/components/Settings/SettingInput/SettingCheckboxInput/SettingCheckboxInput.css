@@ -1,0 +1,25 @@
+.SettingCheckboxInput {
+    height: var(--input-size);
+    width: var(--input-size);
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    background-color: var(--primary-color);
+    appearance: none;
+    position: relative;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.SettingCheckboxInput:checked::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+}

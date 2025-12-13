@@ -1,0 +1,18 @@
+.BreathingAnimationStart {
+    color: var(--tertiary-color);
+    transition-duration: transform 0s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.BreathingAnimationStart:hover {
+    color: var(--secondary-color);
+}
+
+.BreathingAnimationStart.start-triggered {
+    --start-delay: 1.5;
+    transition: opacity calc(var(--start-delay) * 1s);
+    opacity: 0;
+}
