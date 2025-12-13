@@ -41,3 +41,13 @@ button {
 input {
     all: unset;
 }
+
+input,
+textarea {
+    font-size: 16px !important;
+}
+
+.app-container {
+    height: 100dvh;
+    overflow: hidden;
+}
