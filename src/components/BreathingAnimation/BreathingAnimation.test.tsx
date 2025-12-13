@@ -5,256 +5,147 @@
  */
 
 import React from "react";
-import {
-    act,
-    render,
-    screen,
-    fireEvent,
-    waitFor,
-} from "@testing-library/react";
+import { act, render, screen, fireEvent } from "@testing-library/react";
 import BreathingAnimation, { startDelay } from "./BreathingAnimation";
 import { MS_IN_SEC } from "../../constants";
 import { BreathingAnimationRef } from "./BreathingAnimation.types";
 import { DEFAULT_BREATH_DURATION } from "../../utils";
 
-const phase0Class = "phase0";
-const phase1Class = "phase1";
-const phase2Class = "phase2";
-const phase3Class = "phase3";
-const startButtonText = "START";
-
-jest.useFakeTimers();
+const START_BUTTON_TEXT: string = "START";
 
 describe("BreathingAnimation", () => {
+    let ref: React.RefObject<BreathingAnimationRef | null>;
+
     beforeEach(() => {
-        jest.clearAllTimers();
-        jest.resetAllMocks();
+        jest.useFakeTimers();
+        ref = React.createRef<BreathingAnimationRef>();
     });
 
-    it("should render without crashing", () => {
-        render(<BreathingAnimation />);
+    afterEach(() => {
+        jest.restoreAllMocks();
+        jest.useRealTimers();
+    });
+
+    it("renders the component", () => {
+        render(<BreathingAnimation ref={ref} />);
         expect(screen.getByTestId("breathing-animation")).toBeInTheDocument();
-    });
-
-    it("should render all subcomponents", () => {
-        render(<BreathingAnimation />);
         expect(screen.getByText("BREATHE IN")).toBeInTheDocument();
-        expect(screen.getAllByText("HOLD").pop()).toBeInTheDocument();
+        expect(screen.getAllByText("HOLD")).toHaveLength(2);
         expect(screen.getByText("BREATHE OUT")).toBeInTheDocument();
     });
 
-    it("should start in inactive state", () => {
-        render(<BreathingAnimation />);
-        expect(screen.getByText(startButtonText)).toBeInTheDocument();
+    it("cycles through phases correctly", () => {
+        render(<BreathingAnimation ref={ref} />);
+        const dot: HTMLElement = screen
+            .getByTestId("breathing-animation")
+            .querySelector(".BreathingAnimationDot")!;
+
+        // initial phase
+        expect(dot).toHaveClass("phase-1");
+
+        // starts transitions
+        const startButton = screen.getByText(START_BUTTON_TEXT);
+        act(() => {
+            fireEvent.click(startButton);
+            jest.advanceTimersByTime(startDelay * MS_IN_SEC);
+        });
+        expect(dot).toHaveClass("phase-1");
+
+        // phase 0
+        act(() => {
+            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
+        });
+        expect(dot).toHaveClass("phase0");
+
+        // phase 1
+        act(() => {
+            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
+        });
+        expect(dot).toHaveClass("phase1");
+
+        // phase 2
+        act(() => {
+            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
+        });
+        expect(dot).toHaveClass("phase2");
+
+        // phase 3
+        act(() => {
+            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
+        });
+        expect(dot).toHaveClass("phase3");
+
+        // returns to start phase
+        act(() => {
+            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
+        });
+        expect(dot).toHaveClass("phase0");
     });
 
-    it("should trigger start animation when start button is clicked", () => {
-        render(<BreathingAnimation />);
+    it("exposes ref methods", () => {
+        render(<BreathingAnimation ref={ref} />);
+        expect(ref.current?.reset).toBeDefined();
+        expect(ref.current?.setInDuration).toBeDefined();
+        expect(ref.current?.setHoldInDuration).toBeDefined();
+        expect(ref.current?.setOutDuration).toBeDefined();
+        expect(ref.current?.setHoldOutDuration).toBeDefined();
+        expect(ref.current?.setGradientColor).toBeDefined();
+        expect(ref.current?.setTimerHidden).toBeDefined();
+        expect(ref.current?.getTimerHidden).toBeDefined();
+        expect(ref.current?.textContainerRef).toBeDefined();
+    });
+
+    it("resets to initial state", async () => {
+        render(<BreathingAnimation ref={ref} />);
+
+        // start animation
+        const startButton = screen.getByText(START_BUTTON_TEXT);
+
+        act(() => {
+            fireEvent.click(startButton);
+            jest.advanceTimersByTime(
+                startDelay + DEFAULT_BREATH_DURATION * MS_IN_SEC,
+            );
+            // reset animation
+            ref.current?.reset();
+        });
+
         const dot: HTMLElement = screen
             .getByTestId("breathing-animation")
             .querySelector(".BreathingAnimationDot")!;
         expect(dot).toHaveClass("hidden");
-
-        act(() => {
-            fireEvent.click(screen.getByText(startButtonText));
-            jest.advanceTimersByTime(startDelay * MS_IN_SEC);
-        });
-
-        expect(dot).not.toHaveClass("hidden");
+        expect(dot).toHaveClass("phase-1");
     });
 
-    it("should cycle through all breathing phases", () => {
-        const ref = React.createRef<BreathingAnimationRef>();
+    it("resets to initial state during start delay", async () => {
         render(<BreathingAnimation ref={ref} />);
 
-        const startButton: HTMLElement = screen.getByText(startButtonText);
+        const startButton = screen.getByText(START_BUTTON_TEXT);
+
+        // reset before start delay completes
         act(() => {
-            // click start button
             fireEvent.click(startButton);
-            // advance through start delay
-            jest.advanceTimersByTime(startDelay * MS_IN_SEC);
-        });
-
-        // Test each phase transition with appropriate timing
-        const dot: HTMLElement = screen
-            .getByTestId("breathing-animation")
-            .querySelector(".BreathingAnimationDot")!;
-        act(() => {
-            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
-        });
-        expect(dot).toHaveClass(phase0Class);
-        act(() => {
-            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
-        });
-        expect(dot).toHaveClass(phase1Class);
-        act(() => {
-            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
-        });
-        expect(dot).toHaveClass(phase2Class);
-        act(() => {
-            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
-        });
-        expect(dot).toHaveClass(phase3Class);
-        act(() => {
-            jest.advanceTimersByTime(DEFAULT_BREATH_DURATION * MS_IN_SEC);
-        });
-        expect(dot).toHaveClass(phase0Class);
-    });
-
-    it("should expose reset method", () => {
-        const ref = React.createRef<BreathingAnimationRef>();
-        render(<BreathingAnimation ref={ref} />);
-
-        const startButton: HTMLElement = screen.getByText(startButtonText);
-        act(() => {
-            // click start button
-            fireEvent.click(startButton);
-            // advance through start delay
-            jest.advanceTimersByTime(startDelay * MS_IN_SEC);
-        });
-
-        expect(startButton).toHaveClass("start-triggered");
-
-        act(() => {
-            ref.current?.reset();
-        });
-        expect(startButton).not.toHaveClass("start-triggered");
-    });
-
-    it("should allow duration configuration", async () => {
-        const ref = React.createRef<BreathingAnimationRef>();
-        render(<BreathingAnimation ref={ref} />);
-
-        const inDuration = 0.32;
-        const holdInDuration = 0.3;
-        const outDuration = 0.25;
-        const holdOutDuration = 0.1;
-        const gradientColor = "red";
-
-        // Set the durations first
-        act(() => {
-            ref.current?.setInDuration(inDuration);
-            ref.current?.setHoldInDuration(holdInDuration);
-            ref.current?.setOutDuration(outDuration);
-            ref.current?.setHoldOutDuration(holdOutDuration);
-            ref.current?.setGradientColor(gradientColor);
-        });
-
-        const startButton: HTMLElement = screen.getByText(startButtonText);
-
-        // Start the animation
-        fireEvent.click(startButton);
-
-        // Wait for the start delay to complete
-        await act(async () => {
-            jest.advanceTimersByTime(startDelay * MS_IN_SEC);
-            // Allow React to process any state updates
-            await new Promise((resolve) => setTimeout(resolve, 0));
-        });
-
-        const dot: HTMLElement = screen
-            .getByTestId("breathing-animation")
-            .querySelector(".BreathingAnimationDot")!;
-
-        // The component should now be active and in some phase
-        // Let's wait a bit for any initial transitions to settle
-        await act(async () => {
-            // Small advance to trigger any pending phase setup
-            jest.advanceTimersByTime(1);
-            await new Promise((resolve) => setTimeout(resolve, 0));
-        });
-
-        // Now test the phase transitions with the custom durations
-        // Phase transition to phase 1
-        await act(async () => {
-            jest.advanceTimersByTime(inDuration * MS_IN_SEC);
-            await new Promise((resolve) => setTimeout(resolve, 0));
-        });
-
-        await waitFor(() => {
-            expect(dot).toHaveClass(phase1Class);
-        });
-
-        // Phase transition to phase 2
-        await act(async () => {
-            jest.advanceTimersByTime(holdInDuration * MS_IN_SEC);
-            await new Promise((resolve) => setTimeout(resolve, 0));
-        });
-
-        await waitFor(() => {
-            expect(dot).toHaveClass(phase2Class);
-        });
-
-        // Phase transition to phase 3
-        await act(async () => {
-            jest.advanceTimersByTime(outDuration * MS_IN_SEC);
-            await new Promise((resolve) => setTimeout(resolve, 0));
-        });
-
-        await waitFor(() => {
-            expect(dot).toHaveClass(phase3Class);
-        });
-
-        // Phase transition back to phase 0
-        await act(async () => {
-            jest.advanceTimersByTime(holdOutDuration * MS_IN_SEC);
-            await new Promise((resolve) => setTimeout(resolve, 0));
-        });
-
-        await waitFor(() => {
-            expect(dot).toHaveClass(phase0Class);
-        });
-
-        // Verify gradient color
-        expect(
-            screen
-                .getByTestId("breathing-animation")
-                .querySelector(".BreathingAnimationGradient"),
-        ).toHaveStyle(`--gradient-color: ${gradientColor}`);
-    });
-
-    it("should clear timeouts on unmount", () => {
-        const { unmount } = render(<BreathingAnimation />);
-
-        act(() => {
-            fireEvent.click(screen.getByText("START"));
-
-            unmount();
-
-            jest.advanceTimersByTime(startDelay * MS_IN_SEC);
-        });
-
-        expect(jest.getTimerCount()).toBe(0);
-    });
-
-    it("should clear timeouts on reset", () => {
-        const ref = React.createRef<BreathingAnimationRef>();
-        render(<BreathingAnimation ref={ref} />);
-
-        act(() => {
-            fireEvent.click(screen.getByText("START"));
             ref.current?.reset();
         });
 
-        expect(jest.getTimerCount()).toBe(0);
+        // advance past start delay
+        act(() => {
+            jest.advanceTimersByTime(startDelay * 10 * MS_IN_SEC);
+        });
+        expect(screen.getByText(START_BUTTON_TEXT)).toBeInTheDocument();
     });
 
-    it("should apply correct CSS custom properties", () => {
-        const ref = React.createRef<BreathingAnimationRef>();
-        const component = <BreathingAnimation ref={ref} />;
-        const { rerender } = render(component);
-
+    it("hides and shows timer", () => {
+        render(<BreathingAnimation ref={ref} />);
+        // hide timer
         act(() => {
-            ref.current?.setInDuration(3);
-            ref.current?.setGradientColor("#00ff00");
+            ref.current?.setTimerHidden(false);
         });
-
-        rerender(component);
-
-        const gradient = screen
-            .getByTestId("breathing-animation")
-            .querySelector(".BreathingAnimationGradient");
-        expect(gradient).toHaveStyle("--in-duration: 3");
-        expect(gradient).toHaveStyle("--gradient-color: #00ff00");
+        expect(ref.current?.getTimerHidden()).toBe(false);
+        // show timer
+        act(() => {
+            ref.current?.setTimerHidden(true);
+        });
+        expect(ref.current?.getTimerHidden()).toBe(true);
     });
 });

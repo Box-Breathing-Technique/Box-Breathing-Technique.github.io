@@ -9,14 +9,48 @@ import { render, screen } from "@testing-library/react";
 import SettingInput, { testId } from "./SettingInput";
 
 describe("SettingInput", () => {
-    /*
-    it("renders without crashing", () => {
-        render(<SettingInput />);
-        expect(screen.getByTestId(testId)).toBeInTheDocument();
-    }); 
+    const mockHandleInput = jest.fn();
+    const mockValue = jest.fn(() => true);
 
-    it("has correct CSS class", () => {
-        render(<SettingInput />);
-        expect(screen.getByTestId(testId)).toHaveClass("SettingInput");
-    }); */
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("renders the component", () => {
+        render(
+            <SettingInput
+                type="text"
+                placeholder="Test"
+                handleInput={mockHandleInput}
+            />,
+        );
+        const input = screen.getByTestId(testId);
+        expect(input).toBeInTheDocument();
+        expect(input).toHaveClass("SettingInput");
+    });
+
+    it("displays text input when specified", () => {
+        render(
+            <SettingInput
+                type="text"
+                handleInput={mockHandleInput}
+            />,
+        );
+        const component = screen.getByTestId(testId);
+        const inputElement = component.querySelector("input");
+        expect(inputElement).toHaveAttribute("type", "text");
+    });
+
+    it("displays checkbox when specified", () => {
+        render(
+            <SettingInput
+                type="checkbox"
+                handleInput={mockHandleInput}
+                value={mockValue}
+            />,
+        );
+        const component = screen.getByTestId(testId);
+        const inputElement = component.querySelector("input");
+        expect(inputElement).toHaveAttribute("type", "checkbox");
+    });
 });

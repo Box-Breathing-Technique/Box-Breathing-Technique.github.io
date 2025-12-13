@@ -5,18 +5,51 @@
  */
 
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import SettingCheckboxInput, { testId } from "./SettingCheckboxInput";
 
 describe("SettingCheckboxInput", () => {
-    /*
-    it("renders without crashing", () => {
-        render(<SettingCheckboxInput />);
-        expect(screen.getByTestId(testId)).toBeInTheDocument();
-    }); 
+    const mockHandleInput = jest.fn();
+    const mockValueTrue = jest.fn(() => true);
+    const mockValueFalse = jest.fn(() => false);
 
-    it("has correct CSS class", () => {
-        render(<SettingCheckboxInput />);
-        expect(screen.getByTestId(testId)).toHaveClass("SettingCheckboxInput");
-    }); */
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("renders the component", () => {
+        render(
+            <SettingCheckboxInput
+                handleInput={mockHandleInput}
+                value={mockValueFalse}
+            />,
+        );
+        const input = screen.getByTestId(testId) as HTMLInputElement;
+        expect(input).toBeInTheDocument();
+        expect(input.type).toBe("checkbox");
+        expect(input).toHaveClass("SettingCheckboxInput");
+    });
+
+    it("handles click", async () => {
+        render(
+            <SettingCheckboxInput
+                handleInput={mockHandleInput}
+                value={mockValueFalse}
+            />,
+        );
+        const input = screen.getByTestId(testId) as HTMLInputElement;
+        expect(input.checked).toBe(false);
+
+        // checks when clicked
+        fireEvent.click(input);
+        expect(mockHandleInput).toHaveBeenCalledTimes(1);
+        expect(mockHandleInput).toHaveBeenCalledWith(true);
+        expect(input.checked).toBe(true);
+
+        // unchecks when clicked again
+        fireEvent.click(input);
+        expect(mockHandleInput).toHaveBeenCalledTimes(2);
+        expect(mockHandleInput).toHaveBeenCalledWith(false);
+        expect(input.checked).toBe(false);
+    });
 });

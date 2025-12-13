@@ -33,13 +33,3 @@ export interface SettingsItem {
     note?: Partial<SettingNoteProps>;
     value?: () => string | boolean;
 }
-
-export interface SettingsContext {
-    setInDuration?: (value: number) => void;
-    setHoldInDuration?: (value: number) => void;
-    setOutDuration?: (value: number) => void;
-    setHoldOutDuration?: (value: number) => void;
-    setGradientColor?: (value: string) => void;
-    reset?: () => void;
-    fontInfo?: FontInfo;
-}

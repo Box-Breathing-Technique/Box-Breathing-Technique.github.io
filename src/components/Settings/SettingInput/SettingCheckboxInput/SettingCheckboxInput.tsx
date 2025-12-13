@@ -25,7 +25,7 @@ function SettingCheckboxInput({
     handleInput,
     value,
 }: SettingCheckboxInputProps): React.ReactElement {
-    const [checked, setChecked] = useState<boolean>(value());
+    const [checked, setChecked] = useState<boolean>(value() ?? false);
     return (
         <input
             className="SettingCheckboxInput"
