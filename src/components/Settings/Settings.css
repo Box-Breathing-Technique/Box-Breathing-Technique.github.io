@@ -13,6 +13,6 @@
     justify-items: center;
     column-gap: 5px;
     row-gap: 5px;
-    max-width: 100vw;
+    max-width: 100dvw;
     width: max-content;
 }

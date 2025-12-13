@@ -6,4 +6,7 @@
     text-align: center;
     height: var(--input-size);
     width: 10ch;
+    font-size: 16px;
+    -webkit-appearance: none;
+    appearance: none;
 }
