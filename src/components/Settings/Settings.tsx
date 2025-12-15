@@ -27,6 +27,38 @@ interface ElementRowProps {
     index: number;
 }
 
+// helper function to generate settings items
+const ElementRow: (props: ElementRowProps) => React.ReactElement = ({
+    settingsItem,
+    index,
+}) => {
+    const [error, setError] = useState<string | undefined>(undefined);
+    return (
+        <>
+            <SettingDescription
+                key={`desc-${index}`}
+                {...(settingsItem.description as SettingDescriptionProps)}
+            />
+
+            <SettingInput
+                key={`input-${index}`}
+                {...({
+                    ...settingsItem.input,
+                    ...{ setError: setError },
+                } as SettingInputProps)}
+            />
+
+            <SettingNote
+                key={`note-${index}`}
+                {...({
+                    ...settingsItem.note,
+                    ...{ error: error },
+                } as SettingNoteProps)}
+            />
+        </>
+    );
+};
+
 /** Content for the settings panel
  *
  * @property {SettingsItem[]} settingsItems a list of settings items to be displayed in the settings panel
@@ -60,36 +92,6 @@ interface ElementRowProps {
 function Settings({ settingsItems }: SettingsProps): React.ReactElement {
     // generate elements
     const elements: React.ReactElement[] = [];
-    const ElementRow: (props: ElementRowProps) => React.ReactElement = ({
-        settingsItem,
-        index,
-    }) => {
-        const [error, setError] = useState<string | undefined>(undefined);
-        return (
-            <>
-                <SettingDescription
-                    key={`desc-${index}`}
-                    {...(settingsItem.description as SettingDescriptionProps)}
-                />
-
-                <SettingInput
-                    key={`input-${index}`}
-                    {...({
-                        ...settingsItem.input,
-                        ...{ setError: setError },
-                    } as SettingInputProps)}
-                />
-
-                <SettingNote
-                    key={`note-${index}`}
-                    {...({
-                        ...settingsItem.note,
-                        ...{ error: error },
-                    } as SettingNoteProps)}
-                />
-            </>
-        );
-    };
     settingsItems.forEach((value, index) => {
         elements.push(
             <ElementRow
