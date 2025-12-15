@@ -47,6 +47,7 @@ function SettingTextInput({
             className="SettingTextInput"
             data-testid="setting-text-input"
             type="text"
+            inputMode="decimal"
             placeholder={placeholder}
             value={value}
             onChange={(e) => {
@@ -63,6 +64,10 @@ function SettingTextInput({
                         }
                     }, submitDelay);
                 }
+            }}
+            onFocus={(e) => {
+                // Prevent keyboard from closing by ensuring input stays focused
+                e.target.focus();
             }}
         />
     );
