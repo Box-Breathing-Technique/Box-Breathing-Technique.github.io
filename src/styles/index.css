@@ -50,3 +50,9 @@ textarea {
     height: 100dvh;
     overflow: hidden;
 }
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
