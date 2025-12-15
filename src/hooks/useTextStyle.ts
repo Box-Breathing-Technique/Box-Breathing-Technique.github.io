@@ -44,10 +44,17 @@ export function useTextStyle(
         };
         updateSize();
 
-        window.addEventListener("resize", updateSize);
+        let resizeTimeout: NodeJS.Timeout;
+        const debouncedUpdateSize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateSize, 50);
+        };
+
+        window.addEventListener("resize", debouncedUpdateSize);
 
         return () => {
-            window.removeEventListener("resize", updateSize);
+            window.removeEventListener("resize", debouncedUpdateSize);
+            clearTimeout(resizeTimeout);
         };
     }, [getElement]);
 
